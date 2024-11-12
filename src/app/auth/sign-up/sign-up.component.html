@@ -1,0 +1,32 @@
+<main class="main d-flex">
+  <form class="form-center">
+    <header>
+      <h1>RENTA <span>GO</span></h1>
+      <h2>Welcome back</h2>
+    </header>
+    <div class="username credentials">
+      <div class="input-container">
+        <fa-icon [icon]="faUser"></fa-icon>
+        <input type="text" placeholder="Username" />
+      </div>
+    </div>
+    <div class="email credentials">
+      <div class="input-container">
+        <fa-icon [icon]="faEmail"></fa-icon>
+        <input type="text" placeholder="Email address" />
+      </div>
+    </div>
+    <div class="password credentials">
+      <div class="input-container">
+        <fa-icon [icon]="faLock"></fa-icon>
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Password"
+        />
+      </div>
+    </div>
+    <div class="submit credentials">
+      <button>Sign up</button>
+    </div>
+  </form>
+</main>
