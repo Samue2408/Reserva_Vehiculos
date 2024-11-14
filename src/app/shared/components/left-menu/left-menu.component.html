@@ -1,0 +1,17 @@
+<aside class="d-flex f-column justify-between">
+  <div class="items-top d-flex f-column justify-around custom-container">
+    <app-button-item 
+    *ngFor="let button of buttons.slice(0,5)"
+    [icon]="button.icon"
+    [route]="button.route"
+    [name]="button.name"
+    >
+    </app-button-item>
+  </div>
+  <div class="items-bottom custom-container d-flex f-column justify-end">
+    <app-button-item [icon]="buttons[5].icon" [name]="buttons[5].name" [route]="buttons[5].route"></app-button-item>
+    <app-button-item (click)="logOut()" [icon]="buttons[6].icon" [name]="buttons[6].name"></app-button-item>
+  </div>
+</aside>
+
+

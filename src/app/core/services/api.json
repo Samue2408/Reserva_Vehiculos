@@ -1,0 +1,40 @@
+{
+    "cars": [
+      {
+        "make": "Ford",
+        "model": "Capri",
+        "year": 2022,
+        "country": "Alemania",
+        "image_url": "../../core/assets/ford.png"
+      },
+      {
+        "make": "Chevrolet",
+        "model": "Onix",
+        "year": 2021,
+        "country": "USA",
+        "image_url": "../../core/assets/chevrolet.avif"
+      },
+      {
+        "make": "BMW",
+        "model": "X5",
+        "year": 2023,
+        "country": "Germany",
+        "image_url": "../../core/assets/bmw.png"
+      },
+      {
+        "make": "Porshe",
+        "model": "A4",
+        "year": 2020,
+        "country": "Germany",
+        "image_url": "../../core/assets/porsche-model.png"
+      },
+      {
+        "make": "lamborghini",
+        "model": "Urus",
+        "year": 2022,
+        "country": "Japan",
+        "image_url": "../../core/assets/urus.webp"
+      }
+    ]
+  }
+  

@@ -1,0 +1,47 @@
+.activeItem {
+  background-color: #474747 !important;
+  transition: .5s ease-in;
+  color: #f4f5f9;
+  animation: jump .5s ease;
+}
+
+button {
+  border: none;
+  height: 100%;
+  width: 80%;
+  margin-left: 5px;
+  padding: 10px;
+  gap: 10px;
+  padding-left: 15px;
+  border-radius: 6px;
+  
+  background: none;
+  color: rgb(130, 130, 130);
+  
+  cursor: pointer;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+
+  & > * {
+    font-size: 16px;
+  }
+
+  span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

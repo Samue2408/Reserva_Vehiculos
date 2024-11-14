@@ -1,0 +1,23 @@
+<main class="container-main grid">
+  <div *ngFor="let car of cars; let i = index;" class="card" (click)="showCarDetail(i)">
+    <div class="row-1 d-flex">
+      <div class="name d-flex f-column">
+        <h2>{{ car.name }}</h2>
+        <span>{{ car.model }}</span>
+      </div>
+    </div>
+    <div class="row-2">
+      <img [src]="car.source" [alt]="car.name" />
+    </div>
+    <div class="row-3 d-flex justify-around">
+      <div class="left">
+        <fa-icon [icon]="faRetwet" *ngIf="car.gearbox == 'Manual'"></fa-icon>
+        <fa-icon [icon]="faWandSparkles" *ngIf="car.gearbox == 'Automatic'"></fa-icon>
+        {{ car.gearbox }}
+      </div>
+      <div class="price">
+        EU{{ car.price }}
+      </div>
+    </div>
+  </div>
+</main>
