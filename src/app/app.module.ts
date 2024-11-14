@@ -19,7 +19,7 @@ import { SettingsComponent } from './features/settings/settings.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ModalBookingComponent } from './shared/components/modal-booking/modal-booking.component';
-
+import { FormsModule } from '@angular/forms'; 
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { ModalBookingComponent } from './shared/components/modal-booking/modal-b
     AppRoutingModule,
     FontAwesomeModule,
     CommonModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [

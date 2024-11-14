@@ -1,27 +1,33 @@
 <main class="main d-flex">
-    <form class="form-center">
-      <header>
-        <h1>RENTA <span>GO</span></h1>
-        <h2>Welcome back</h2>
-      </header>
-      <div class="username credentials">
-        <div class="input-container">
-          <fa-icon [icon]="faEmail"></fa-icon>
-          <input type="text" placeholder="Email address" />
-        </div>
+  <form (ngSubmit)="onSubmit()" class="form-center">
+    <header>
+      <h1>RENTA <span>GO</span></h1>
+      <h2>Welcome back</h2>
+    </header>
+    <div class="username credentials">
+      <div class="input-container">
+        <fa-icon [icon]="faEmail"></fa-icon>
+        <input type="text" [(ngModel)]="email" name="email" placeholder="Email address" required />
       </div>
-      <div class="password credentials">
-        <div class="input-container">
-          <fa-icon [icon]="faLock"></fa-icon>
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            placeholder="Password"
-          />
-        </div>
+    </div>
+    <div class="password credentials">
+      <div class="input-container">
+        <fa-icon [icon]="faLock"></fa-icon>
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
       </div>
-      <div class="submit credentials">
-        <button>Login</button>
-      </div>
-      <a href="">Don't have an account yet? <span [routerLink]="'/sign-up'">Register</span></a>
-    </form>
-  
+    </div>
+    <div class="submit credentials">
+      <button type="submit">Login</button>
+    </div>
+    <a href="">
+      Don't have an account yet?
+      <span [routerLink]="'/sign-up'">Register</span>
+    </a>
+  </form>
+</main>

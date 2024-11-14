@@ -1,5 +1,5 @@
 <main class="main d-flex">
-  <form class="form-center">
+  <form class="form-center" (ngSubmit)="onSubmit()">
     <header>
       <h1>RENTA <span>GO</span></h1>
       <h2>Welcome back</h2>
@@ -7,13 +7,13 @@
     <div class="username credentials">
       <div class="input-container">
         <fa-icon [icon]="faUser"></fa-icon>
-        <input type="text" placeholder="Username" />
+        <input type="text" [(ngModel)]="fullName" name="fullName" placeholder="Full name" required />
       </div>
     </div>
     <div class="email credentials">
       <div class="input-container">
         <fa-icon [icon]="faEmail"></fa-icon>
-        <input type="text" placeholder="Email address" />
+        <input type="text" [(ngModel)]="email" name="email" placeholder="Email address" required />
       </div>
     </div>
     <div class="password credentials">
@@ -21,12 +21,15 @@
         <fa-icon [icon]="faLock"></fa-icon>
         <input
           [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          name="password"
           placeholder="Password"
+          required
         />
       </div>
     </div>
     <div class="submit credentials">
-      <button>Sign up</button>
+      <button type="submit">Sign up</button>
     </div>
   </form>
 </main>
