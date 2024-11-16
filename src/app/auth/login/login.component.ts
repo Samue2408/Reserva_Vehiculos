@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faArrowRight, faEnvelope, faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faEnvelope, faExclamationTriangle, faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons';
 import { UsersService } from '../../core/services/users.service';
 import { Router } from '@angular/router';
 
@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   email: string = '';
   password: string = '';
+  errorCredentials: boolean = false;
 
   // Icons
   faArrow = faArrowRight;
@@ -19,6 +20,8 @@ export class LoginComponent implements OnInit {
   faLock = faLock;
   faEye = faEye;
   faEyeSlash = faEyeSlash;
+  faWarning = faExclamationTriangle
+
 
   showPassword = false;
 
@@ -35,19 +38,17 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(): void {
-    // Verifica que los campos no estén vacíos
     if (this.email && this.password) {
       const userData = { email: this.email, password: this.password };
 
-      // Llama al método `loginUser` del servicio con los datos del usuario
       this.userService.loginUser(userData).subscribe({
         next: (response) => {
           localStorage.setItem("Token", response.token)
           console.log('Inicio de sesion Exitoso', response);
-          // Redirige a la página de inicio después del inicio de sesion
           this.router.navigate(['/']);
         },
         error: (err) => {
+          this.errorCredentials = true;
           console.error('credenciales invalidas', err);
         }
       });

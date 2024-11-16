@@ -1,104 +1,196 @@
 .main {
-    width: 100%;
-    height: 100vh;
-    background-color: #191919;
-    justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #191919;
+  justify-content: center;
+  align-items: center;
+  transition: 1s ease;
+  overflow-y: hidden;
+
+  .form-center {
+    background-color: #191919b5;
+    width: 35%;
+    min-width: 35%;
+    height: 580px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-  
-    .form-center {
-      background-color: #191919;
-      width: 30%;
-      height: 400px;
-      border-radius: 8px;
+    justify-content: space-around;
+    z-index: 10;
+    border: 1px solid rgb(109, 109, 109);
+    backdrop-filter: blur(20px);
+
+    header {
+      width: 100%;
+      height: 40%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-around;
-      box-shadow: 10px 10px 10px #0e0d0d, -10px -10px 10px #222;
-  
-      header {
-        width: 100%;
-        height: 40%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-  
-        h1 {
-          font-family: "Righteous";
-          color: white;
-  
-          span {
-            color: red;
-          }
-        }
-  
-        h2 {
-          font-family: Helvetica;
-          color: rgb(202, 202, 202);
-          font-size: 15px;
-          position: absolute;
-          bottom: 2px;
+      position: relative;
+      user-select: none;
+
+      h1 {
+        font-family: "Righteous";
+        color: white;
+
+        span {
+          font-family: inherit;
+          color: rgb(4, 241, 186);
         }
       }
-  
-      .credentials {
-        width: 100%;
-        height: calc(100% / 3);
-  
-        button {
-          width: 70%;
-          padding: 10px;
+
+      h2 {
+        font-family: Helvetica;
+        color: rgb(202, 202, 202);
+        font-size: 15px;
+        position: absolute;
+        bottom: 5px;
+      }
+    }
+
+    .credentials {
+      width: 100%;
+      height: calc(100% / 3);
+      position: relative;
+
+      button {
+        width: 70%;
+        padding: 10px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        height: 40px;
+        background-color: rgb(4, 241, 186);
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.5s ease;
+
+        &:hover {
+          background-color: rgb(0, 215, 165);
+        }
+      }
+
+      .msg-error {
+        color: red;
+        position: absolute;
+        left: 15%;
+        bottom: -3px;
+      }
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .input-container {
+        width: 70%;
+        height: 65%;
+        position: relative;
+        border-radius: 5px;
+
+        input {
+          position: absolute;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          border-radius: inherit;
           border: none;
           outline: none;
-          border-radius: 5px;
-          height: 40px;
-          background-color: #0173dd;
-          color: white;
-          font-weight: 600;
-          font-size: 15px;
+          background-color: #121212;
+          padding-left: 40px;
+          color: #7e7e7e;
+
+          &::placeholder {
+            color: #7e7e7e;
+          }
         }
-  
+
+
+        fa-icon {
+          position: absolute;
+          left: 10px;
+          color: #7e7e7e;
+          z-index: 999;
+          top: calc(100% - 65%);
+        }
+
+        .eye-container {
+          position: absolute;
+          right: 0;
+          width: 10%;
+          height: 100%;
+          z-index: 999;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
       }
-  
-      div {
+    }
+
+    a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      margin-bottom: 20px;
+
+      span {
+        color: rgb(0, 215, 165);
+      }
+    }
+
+    .securePasswordContainer {
+      width: 70%;
+      height: 120px;
+      transition: 1s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+
+      .levels {
+        width: 100%;
+        height: 50%;
+        min-height: 50%;
         display: flex;
-        align-items: center;
-        justify-content: center;
-  
-        .input-container {
-          width: 70%;
-          height: 50%;
-          position: relative;
-          border-radius: 5px;
-  
-          input {
-            position: absolute;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            border-radius: inherit;
-            border: none;
-            outline: none;
-            background-color: #121212;
-            padding-left: 40px;
-            color: #7e7e7e;
-  
-            &::placeholder {
-              color: #7e7e7e;
-            }
-          }
-  
-          fa-icon {
-            position: absolute;
-            left: 10px;
-            color: #7e7e7e;
-            z-index: 999;
-            top: calc(100% - 70%);
-          }
+        justify-content: space-around;
+
+
+        .level {
+          transition: .7s ease;
+          width: calc(100% / 6);
+          height: 5px;
+          border-radius: 6px;
         }
       }
-  
+
+      .msg {
+        width: 100%;
+        height: 50%;
+        min-height: 50%;
+      }
+    }
+
+    .msg-error {
+      display: block;
+      color: red;
+      margin-bottom: -8px;
+      text-align: center;
+      transition: .7s ease;
     }
   }
-  
+
+  app-animated-background {
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+}

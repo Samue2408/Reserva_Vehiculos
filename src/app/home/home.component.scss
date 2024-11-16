@@ -1,0 +1,197 @@
+main {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #131313;
+  background-image: url("https://png.pngtree.com/png-vector/20220615/ourmid/pngtree-grid-paper-dot-pattern-background-png-image_5093042.png");
+
+  .top {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+      width: 100%;
+      height: 80%;
+      display: flex;
+      position: relative;
+
+      .header-description {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 30px;
+        gap: 15px;
+        
+        .description-title {
+          color: white;
+          font-size: 4rem;
+          margin: 0;
+          background-image: linear-gradient(to right, #ff7e5f, #c516e8);
+          -webkit-background-clip: text;
+          color: transparent;
+          
+        }
+
+        .description-text {
+          color: rgb(178, 178, 178);
+          font-size: 1.2rem;
+        }
+
+        .buttons {
+          width: 80%;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          gap: 25px;
+
+          & > button {
+            border-radius: 2px;
+            padding: 15px;
+            width: 30%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+          }
+
+          & > button:first-of-type {
+            background-color: rgb(0, 215, 165);
+          }
+
+          & > button:last-of-type {
+            background-color: transparent;
+          }
+        }
+      }
+
+      .header-image {
+        width: 50%;
+        height: 100%;
+        background-image: url("../../assets/porshe-landing.avif");
+        background-size: cover;
+        background-position: center center;
+        transform: scale(0.8);
+        transition: transform 0.2s ease-in-out;
+      }
+    }
+
+    .branding {
+      width: 100%;
+      height: calc(100% - 80%);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        filter: opacity(0.2);
+        transform: scale(0.8);
+
+        &:nth-of-type(3) {
+          filter: brightness(100%);
+          width: calc(100% / 25);
+        }
+      }
+    }
+  }
+
+  .about {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), black);
+    background-blend-mode: multiply;
+
+    h2{
+      color: white;
+      font-size: 3.5rem;
+      font-family: 'Cormorant';
+      margin: 0;
+    }
+
+    p{
+      margin: 0;
+      text-align: center;
+      font-size: 1rem;
+      color: rgb(190, 190, 190);
+      width: 50%;
+    }
+
+    .cards{
+      width: 100%;
+      height: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: 10px;
+
+      .card-car{
+        box-shadow: none !important;
+        background-color: #131313 !important;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        padding-left: 20px;
+        background-image: url("https://png.pngtree.com/png-vector/20220615/ourmid/pngtree-grid-paper-dot-pattern-background-png-image_5093042.png");
+
+        &:first-of-type{
+          background: linear-gradient(#bf62d2, #c516e8) !important;
+        }
+
+        &:nth-of-type(2){
+          background: linear-gradient(#66d262, #72df56) !important;
+        }
+
+        &:nth-of-type(3){
+          background: linear-gradient(#62d2ce, #56cfdf) !important;
+        }
+
+        &:nth-of-type(4){
+          background: linear-gradient(#bcd262, #d1df56) !important;
+        }
+
+        fa-icon{
+          position: absolute;
+          left: 20px;
+          top: 20px;
+          font-size: 30px;
+          color: white;
+        }
+
+        h3{
+          color: white;
+          font-weight: 700;
+          font-size: 30px;
+          max-height: 30px;
+          width: 90%;
+        }
+        
+        p{
+          width: 70%;
+          text-align: start;
+          font-size: 15px;
+          height: 30px;
+          margin-top: 30px;
+          color: white;
+        }
+      }
+
+    }
+  
+  }
+}

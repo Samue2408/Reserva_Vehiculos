@@ -1,23 +1,52 @@
 <main class="main d-flex">
+  <app-animated-background></app-animated-background>
   <form class="form-center" (ngSubmit)="onSubmit()">
     <header>
       <h1>RENTA <span>GO</span></h1>
-      <h2>Welcome back</h2>
+      <h2>Register</h2>
     </header>
+
+    <!--Inputs-->
+
     <div class="username credentials">
       <div class="input-container">
         <fa-icon [icon]="faUser"></fa-icon>
-        <input type="text" [(ngModel)]="fullName" name="fullName" placeholder="Full name" required />
+        <input
+          type="text"
+          [(ngModel)]="fullName"
+          name="fullName"
+          placeholder="Full name"
+          required
+        />
       </div>
     </div>
     <div class="email credentials">
       <div class="input-container">
         <fa-icon [icon]="faEmail"></fa-icon>
-        <input type="text" [(ngModel)]="email" name="email" placeholder="Email address" required />
+        <input
+          type="text"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Email address"
+          required
+          class="emailInput"
+          (input)="validateEmail(email)"
+        />
       </div>
     </div>
+
+    <span class="level-low-color" *ngIf="!validateEmailController">Ingrese un correo válido.</span>
+
     <div class="password credentials">
       <div class="input-container">
+        <div class="eye-container" (click)="togglePasswordVisibility()">
+          <fa-icon *ngIf="!showPassword" class="eye" [icon]="faEye"></fa-icon>
+          <fa-icon
+            *ngIf="showPassword"
+            class="eye"
+            [icon]="faEyeSlash"
+          ></fa-icon>
+        </div>
         <fa-icon [icon]="faLock"></fa-icon>
         <input
           [type]="showPassword ? 'text' : 'password'"
@@ -25,11 +54,48 @@
           name="password"
           placeholder="Password"
           required
+          (input)="validateSecurePassword(password)"
         />
       </div>
     </div>
+
+    <div class="securePasswordContainer" *ngIf="showValidateControllers">
+      <div class="levels">
+        <div
+          class="level"
+          *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
+          [ngClass]="getBarClass(i)"
+        ></div>
+      </div>
+      <div class="msg">
+        <span
+          class="text-secure"
+          [ngClass]="{
+            'level-low-color': strengthLevel < 3,
+            'level-medium-color': strengthLevel < 5,
+            'level-high-color': strengthLevel >= 5
+          }"
+          >{{ messageSecure }}</span
+        >
+      </div>
+    </div>
+
+    <!--Alerts-->
+    <span class="msg-error" *ngIf="errorUser"
+      ><fa-icon [icon]="faWarning"></fa-icon> Error al registrar usuario.</span
+    >
+
+    <span class="msg-error" *ngIf="emptyFields"
+      ><fa-icon [icon]="faWarning"></fa-icon>Campos vacíos</span
+    >
+
+    <!--Other elements-->
     <div class="submit credentials">
       <button type="submit">Sign up</button>
     </div>
+    <a [routerLink]="'/login'">
+      Already have an account?
+      <span>Sign in</span>
+    </a>
   </form>
 </main>

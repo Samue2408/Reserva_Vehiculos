@@ -10,6 +10,7 @@ import { SettingsComponent } from './features/settings/settings.component';
 import { CarDetailComponent } from './features/cars/car-detail/car-detail.component';
 import { LogOutComponent } from './auth/log-out/log-out.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [  
   {
@@ -59,6 +60,10 @@ const routes: Routes = [
   {
     path: 'log-out',
     component: LogOutComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: '**',

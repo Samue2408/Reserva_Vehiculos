@@ -19,7 +19,9 @@ import { SettingsComponent } from './features/settings/settings.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ModalBookingComponent } from './shared/components/modal-booking/modal-booking.component';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { AnimatedBackgroundComponent } from './shared/components/animated-background/animated-background.component';
+import { HomeComponent } from './home/home.component'; 
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     SignUpComponent,
     ModalBookingComponent,
+    AnimatedBackgroundComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

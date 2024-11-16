@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=La+Belle+Aurore&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap');
 
 *, *::after, *::before {
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+
 }
 
 
@@ -16,6 +18,10 @@ html, body {
 
 .d-flex {
   display: flex;
+}
+
+.d-block{
+  display: block;
 }
 
 .f-column {
@@ -100,4 +106,34 @@ html, body {
 
 .card:not(:first-of-type){
   background-color: white;
+}
+
+// Colors for password secure
+
+.level-high-bg{
+  background-color: green;
+}
+
+.level-medium-bg{
+  background-color: yellow;
+}
+
+.level-low-bg{
+  background-color: red;
+}
+
+.level-high-color{
+  color: green;
+}
+
+.level-medium-color{
+  color: yellow;
+}
+
+.level-low-color{
+  color: red;
+}
+
+.nav-dark{
+  background-color: #131313;
 }

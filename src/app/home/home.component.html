@@ -1,0 +1,36 @@
+<main>
+  <app-nav-bar [cssClass]="'nav-dark'"></app-nav-bar>
+  <div class="top">
+    <header class="header">
+      <div class="header-description">
+        <h1 class="description-title">
+          Search and find your best car rental with easy way
+        </h1>
+        <p class="description-text">
+          Drive performance and your cross-functional collaboration with
+          easy-to-use dashboards, data visualizations, and automated insights in
+          one click.
+        </p>
+        <div class="buttons">
+          <button>Rent</button>
+          <button>See all cars</button>
+        </div>
+      </div>
+      <div class="header-image"></div>
+    </header>
+    <div class="branding">
+      <img *ngFor="let branding of brandings" [src]="branding" alt="marca" />
+    </div>
+  </div>
+  <div class="about">
+    <h2>We are an entity that rents cars</h2>
+    <p>We are dedicated to providing our customers with an exceptional experience when renting high-quality vehicles, giving them the freedom to travel comfortably and with confidence. With a diverse fleet and personalized service, we ensure that each of our customers receives a safe, efficient and hassle-free service.</p>
+    <div class="cards">
+      <div *ngFor="let card of cards" class="card-car">
+        <fa-icon [icon]="card.icon"></fa-icon>
+        <h3>{{card.title}}</h3>
+        <p>{{card.description}}</p>
+      </div>
+    </div>
+  </div>
+</main>

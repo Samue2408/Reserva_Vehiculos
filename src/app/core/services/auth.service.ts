@@ -16,4 +16,9 @@ export class AuthService {
     const token = localStorage.getItem('Token');
     return !!token; // Devuelve true si el token existe
   }
+
+  validateEmail(email: string): boolean{
+    const regex =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email);
+  }
 }

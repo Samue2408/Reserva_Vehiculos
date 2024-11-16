@@ -1,4 +1,5 @@
 <main class="main d-flex">
+  <app-animated-background></app-animated-background>
   <form (ngSubmit)="onSubmit()" class="form-center">
     <header>
       <h1>RENTA <span>GO</span></h1>
@@ -7,12 +8,22 @@
     <div class="username credentials">
       <div class="input-container">
         <fa-icon [icon]="faEmail"></fa-icon>
-        <input type="text" [(ngModel)]="email" name="email" placeholder="Email address" required />
+        <input
+          type="text"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Email address"
+          required
+        />
       </div>
     </div>
-    <div class="password credentials">
+    <div class="password credentials f-column">
       <div class="input-container">
         <fa-icon [icon]="faLock"></fa-icon>
+        <div class="eye-container" (click)="togglePasswordVisibility()">
+          <fa-icon *ngIf="!showPassword" class="eye" [icon]="faEye"></fa-icon>
+          <fa-icon *ngIf="showPassword" class="eye" [icon]="faEyeSlash"></fa-icon>
+        </div>
         <input
           [type]="showPassword ? 'text' : 'password'"
           [(ngModel)]="password"
@@ -21,13 +32,16 @@
           required
         />
       </div>
+      <span class="msg-error" *ngIf="errorCredentials">
+        <fa-icon [icon]="faWarning"></fa-icon>
+        Credenciales incorrectas</span>
     </div>
     <div class="submit credentials">
       <button type="submit">Login</button>
     </div>
     <a [routerLink]="'/sign-up'">
       Don't have an account yet?
-      <span >Register</span>
+      <span>Register</span>
     </a>
   </form>
 </main>
