@@ -9,6 +9,7 @@
       <div class="input-container">
         <fa-icon [icon]="faEmail"></fa-icon>
         <input
+        (input)= "validateField()"
           type="text"
           [(ngModel)]="email"
           name="email"
@@ -25,6 +26,7 @@
           <fa-icon *ngIf="showPassword" class="eye" [icon]="faEyeSlash"></fa-icon>
         </div>
         <input
+          (input)= "validateField()"
           [type]="showPassword ? 'text' : 'password'"
           [(ngModel)]="password"
           name="password"

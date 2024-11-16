@@ -10,10 +10,21 @@ import { Router } from '@angular/router';
   styleUrl: './cars.component.scss'
 })
 export class CarsComponent implements OnInit{
+  cars: any
 
   constructor(private carsService: CarService, private router: Router){
-
+    this.carsService.getAllCars().subscribe({    
+      next: (response) => {
+        this.cars = response
+        console.log('Carros cargados', response);
+      },
+      error: (err) => {
+        console.error('Carros no cargados', err);
+      }  
+    })
   }
+
+  
 
   ngOnInit(): void {
     
@@ -23,7 +34,12 @@ export class CarsComponent implements OnInit{
   faRetwet = faRetweet
   faWandSparkles = faWandSparkles
 
-  cars: any = [
+  
+
+
+
+
+  /* cars: any = [
     {
       name: 'Ford F-150',
       source: 'https://pictures.dealer.com/fd-DIG_IMAGES/9ac83d3974e29ab8982d21e1d97ffe82.png?w=640&impolicy=downsize_bkpt&imdensity=1',
@@ -87,7 +103,7 @@ export class CarsComponent implements OnInit{
       gearbox: 'Automatic',
       model: 2024
     },
-  ]
+  ] */
 
   showCarDetail(index: number){
     this.router.navigate([`/main/cars/carDetail/${index}`])

@@ -1,21 +1,48 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  private myAppUrl: string;
+  private myApiUrl: string;
 
-  isLoggedIn(): boolean {    
-    // Verifica el token en localStorage para determinar si el usuario está logueado
-    if (typeof localStorage === 'undefined') { //PARA QUE NO SALGA EL ERROR EN LA CONSOLA DE QUE NO ESTA DEFINIDO PERO CARGA LA PANTALLA
-      // Si `localStorage` no está disponible, devuelve `false` o maneja de otra manera
-      return false;
-    }
-    const token = localStorage.getItem('Token');
-    return !!token; // Devuelve true si el token existe
+  constructor(private http: HttpClient) {
+    this.myAppUrl = environment.endpoint;
+    this.myApiUrl = 'api/users/';
   }
+
+  isLoggedIn(): Observable<any> {
+    if (typeof localStorage === 'undefined') {
+      return new Observable(observer => {
+        observer.next({ valid: null });
+        observer.complete();
+      });
+    }
+    
+    const token = localStorage.getItem('Token');
+    
+    if (token) {
+      return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}validate-token`, { token })
+    }    
+
+    return new Observable(observer => {
+      observer.next({ valid: false });
+      observer.complete();
+    });
+  }
+
+  logout(): void {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('Token');
+    }
+    
+  }
+
 
   validateEmail(email: string): boolean{
     const regex =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

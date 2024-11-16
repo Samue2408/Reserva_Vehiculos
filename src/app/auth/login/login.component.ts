@@ -52,7 +52,16 @@ export class LoginComponent implements OnInit {
           console.error('credenciales invalidas', err);
         }
       });
+    } else {
+      this.errorCredentials = false
     }
+  }
+
+  validateField(): boolean {
+    if (!this.email || !this.password) {
+      return this.errorCredentials = false
+    }
+    return true;
   }
 
 }

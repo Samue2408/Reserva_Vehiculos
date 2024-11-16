@@ -1,22 +1,25 @@
 <main class="container-main grid">
   <div *ngFor="let car of cars; let i = index;" class="card" (click)="showCarDetail(i)">
     <div class="row-1 d-flex">
-      <div class="name d-flex f-column">
-        <h2>{{ car.name }}</h2>
-        <span>{{ car.model }}</span>
+      <div class="w-100 name d-flex f-column">
+        <div class="d-flex align-center justify-between">
+          <h2>{{ car.brand }} {{ car.model }}</h2>
+          <span>"{{ car.license_plate }}"</span>
+        </div>
+        <span>{{ car.car_year }}</span>
       </div>
     </div>
     <div class="row-2">
-      <img [src]="car.source" [alt]="car.name" />
+      <img [src]="car.image_path" [alt]="car.model" />
     </div>
     <div class="row-3 d-flex justify-around">
       <div class="left">
-        <fa-icon [icon]="faRetwet" *ngIf="car.gearbox == 'Manual'"></fa-icon>
-        <fa-icon [icon]="faWandSparkles" *ngIf="car.gearbox == 'Automatic'"></fa-icon>
-        {{ car.gearbox }}
+        <fa-icon [icon]="faRetwet" *ngIf="car.transmission == 'Manual'"></fa-icon>
+        <fa-icon [icon]="faWandSparkles" *ngIf="car.transmission == 'Automatic'"></fa-icon>
+        {{ car.transmission }}
       </div>
       <div class="price">
-        ${{ car.price }}
+        ${{ car.daily_fee }}
       </div>
     </div>
   </div>

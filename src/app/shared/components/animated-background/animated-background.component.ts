@@ -26,8 +26,8 @@ export class AnimatedBackgroundComponent implements OnInit {
       Math.random() * (max - min) + min;
 
     const moveShape = () => {
-      const x = getRandomValue(-500, 500);
-      const y = getRandomValue(-300, 300);
+      const x = getRandomValue(-400, 540);
+      const y = getRandomValue(-200, 200);
       const rotation = getRandomValue(0, 360);
       const scale = getRandomValue(0.5, 2);
 

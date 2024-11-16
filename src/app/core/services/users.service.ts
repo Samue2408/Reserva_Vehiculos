@@ -38,11 +38,19 @@ export class UsersService {
   }
 
   logoutUser(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+
+    let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-  });
+    });
     
+    if (typeof localStorage !== 'undefined') {
+      headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+        'Content-Type': 'application/json',
+      });
+      localStorage.removeItem('Token');
+    }
+        
     return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}logout`, {}, {headers});
   }
 
