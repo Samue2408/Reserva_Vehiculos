@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
@@ -33,7 +33,17 @@ export class UsersService {
     return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}`, user);
   }
 
-  loginUser(user: { email: string; password: string }): Observable<void> {
-    return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}login`, user);
+  loginUser(user: { email: string; password: string }): Observable<any> {
+    return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}login`, user);
   }
+
+  logoutUser(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+      'Content-Type': 'application/json',
+  });
+    
+    return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}logout`, {}, {headers});
+  }
+
 }

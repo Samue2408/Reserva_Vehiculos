@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import { faCarRear } from '@fortawesome/free-solid-svg-icons';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,7 @@ import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
-export class MainComponent {
+export class MainComponent implements OnInit{
 
     // icons
     faList = faList
@@ -24,4 +24,9 @@ export class MainComponent {
     faUser = faUser
     faGear = faGear
     faArrowRightFromBracket = faArrowRightFromBracket
+
+    ngOnInit(): void {
+      
+    }
+
 }

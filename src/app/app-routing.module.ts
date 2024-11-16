@@ -9,11 +9,13 @@ import { CustomersComponent } from './features/customers/customers.component';
 import { SettingsComponent } from './features/settings/settings.component';
 import { CarDetailComponent } from './features/cars/car-detail/car-detail.component';
 import { LogOutComponent } from './auth/log-out/log-out.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
-const routes: Routes = [
+const routes: Routes = [  
   {
     path: 'main',
     component: MainComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

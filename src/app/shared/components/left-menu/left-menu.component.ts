@@ -8,6 +8,8 @@ import { faHouseChimneyWindow } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { UsersService } from '../../../core/services/users.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-left-menu',
@@ -26,13 +28,26 @@ export class LeftMenuComponent {
   faGear = faGear
   faArrowRightFromBracket = faArrowRightFromBracket
 
-  constructor(private router: Router){
+  constructor(private router: Router, private _userSevice: UsersService){
 
   }
 
   logOut(){
+
     // this.router.navigate(['/log-out']);
-    this.router.navigate(['/login'])
+    
+    this._userSevice.logoutUser().subscribe({
+      next: (response) => {
+        console.log(response.message); // Muestra mensaje de éxito
+        localStorage.removeItem("Token");
+        this.router.navigate(['/login']);
+        
+      },
+      error: (e) => {
+        console.log("Error al desloguearse", e)
+      }
+    })
+    
     // setTimeout(() => {
     // }, 4000);
   }

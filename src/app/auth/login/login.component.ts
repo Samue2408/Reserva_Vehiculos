@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
       // Llama al método `loginUser` del servicio con los datos del usuario
       this.userService.loginUser(userData).subscribe({
         next: (response) => {
+          localStorage.setItem("Token", response.token)
           console.log('Inicio de sesion Exitoso', response);
           // Redirige a la página de inicio después del inicio de sesion
           this.router.navigate(['/']);
