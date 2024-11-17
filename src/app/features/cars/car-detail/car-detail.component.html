@@ -1,1 +1,53 @@
-<p>{{id}}</p>
+<main class="grid">
+  <ng-container *ngIf="car">
+    <header class="header">
+      <div class="left">
+        <h4>{{ car.brand }}</h4>
+        <h2>{{ car.model }}</h2>
+        <span>2023</span>
+      </div>
+      <div class="center">
+        <div class="child mileage">
+          <h2>Mileage</h2>
+          <h2>{{ car.mileage }}</h2>
+        </div>
+        <div class="child transmition">
+          <h2>Transmission</h2>
+          <h2>
+            {{ car.transmission }}
+            <fa-icon
+              [icon]="faRetwet"
+              *ngIf="car.transmission == 'Manual'"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faWandSparkles"
+              *ngIf="car.transmission == 'Automatic'"
+            ></fa-icon>
+          </h2>
+        </div>
+        <div class="child type">
+          <h2>Type</h2>
+          <h2>{{ car.car_type }}</h2>
+        </div>
+        <div class="child seats">
+          <h2>Seats</h2>
+          <h2>{{ car.seats }}</h2>
+        </div>
+      </div>
+      <div class="right">
+        <div class="child payment">
+          <h2>Your payment</h2>
+          <h2>{{ car.daily_fee }} <span>/hour</span></h2>
+        </div>
+        <div class="child button">
+          <button>Rent</button>
+        </div>
+      </div>
+    </header>
+    <div class="car">
+      <img [src]="car.image_path" alt="" />
+    </div>
+    <div class="financing"></div>
+    <div class="overview"></div>
+  </ng-container>
+</main>

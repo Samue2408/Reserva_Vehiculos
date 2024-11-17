@@ -1,26 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=La+Belle+Aurore&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=La+Belle+Aurore&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap");
 
-*, *::after, *::before {
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+*,
+*::after,
+*::before {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-
 }
 
-
-
-html, body {
+html,
+body {
   width: 100%;
   height: 100vh;
   margin: 0;
   padding: 0;
 }
 
+
+
 .d-flex {
   display: flex;
 }
 
-.d-block{
+.d-block {
   display: block;
 }
 
@@ -44,7 +49,7 @@ html, body {
   justify-content: space-around;
 }
 
-.justify-end{
+.justify-end {
   justify-content: end;
 }
 
@@ -72,29 +77,29 @@ html, body {
   width: 100%;
 }
 
-.container-main{
+.container-main {
   width: 100%;
   height: 100%;
   border-radius: 10px;
 }
 
-.card{
+.card {
   justify-self: center;
   width: 80%;
   border-radius: 10px;
 }
 
-.card-big{
+.card-big {
   width: 100%;
   border-radius: 10px;
   background-color: white;
 
-  &:first-of-type{
+  &:first-of-type {
     margin-left: 50px;
   }
 }
 
-.card-car{
+.card-car {
   background-color: white;
   -webkit-box-shadow: -2px -6px 16px -1px rgba(217, 217, 217, 1);
   -moz-box-shadow: -2px -6px 16px -1px rgba(217, 217, 217, 1);
@@ -104,36 +109,56 @@ html, body {
   border-radius: 10px;
 }
 
-.card:not(:first-of-type){
+.card:not(:first-of-type) {
   background-color: white;
 }
 
 // Colors for password secure
 
-.level-high-bg{
+.level-high-bg {
   background-color: green;
 }
 
-.level-medium-bg{
+.level-medium-bg {
   background-color: yellow;
 }
 
-.level-low-bg{
+.level-low-bg {
   background-color: red;
 }
 
-.level-high-color{
+.level-high-color {
   color: green;
 }
 
-.level-medium-color{
+.level-medium-color {
   color: yellow;
 }
 
-.level-low-color{
+.level-low-color {
   color: red;
 }
 
-.nav-dark{
+.nav-dark {
   background-color: #131313;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+  border: 2px solid #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

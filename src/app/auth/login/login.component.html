@@ -37,6 +37,9 @@
       <span class="msg-error" *ngIf="errorCredentials">
         <fa-icon [icon]="faWarning"></fa-icon>
         Credenciales incorrectas</span>
+        <span class="msg-error" *ngIf="emptyFields">
+          <fa-icon [icon]="faWarning"></fa-icon>
+          Error! Campos vacios.</span>
     </div>
     <div class="submit credentials">
       <button type="submit">Login</button>

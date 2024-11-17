@@ -1,5 +1,5 @@
 <main>
-  <app-nav-bar [cssClass]="'nav-dark'"></app-nav-bar>
+  <app-nav-bar [cssClass]="'nav-dark'" [isHomeView]="true"></app-nav-bar>
   <div class="top">
     <header class="header">
       <div class="header-description">
@@ -22,7 +22,7 @@
       <img *ngFor="let branding of brandings" [src]="branding" alt="marca" />
     </div>
   </div>
-  <div class="about">
+  <div class="about" id="about">
     <h2>We are an entity that rents cars</h2>
     <p>We are dedicated to providing our customers with an exceptional experience when renting high-quality vehicles, giving them the freedom to travel comfortably and with confidence. With a diverse fleet and personalized service, we ensure that each of our customers receives a safe, efficient and hassle-free service.</p>
     <div class="cards">
@@ -33,4 +33,5 @@
       </div>
     </div>
   </div>
+  <div class="services"></div>
 </main>

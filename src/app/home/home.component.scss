@@ -1,9 +1,19 @@
+html{
+  scroll-behavior: smooth !important;
+  
+}
 main {
   width: 100%;
   height: 100%;
   overflow-y: auto;
   background-color: #131313;
   background-image: url("https://png.pngtree.com/png-vector/20220615/ourmid/pngtree-grid-paper-dot-pattern-background-png-image_5093042.png");
+
+
+  #about, #services, #catalog, #blog {
+    scroll-margin-top: 10px; 
+  }
+  
 
   .top {
     width: 100%;
@@ -114,6 +124,7 @@ main {
     padding: 20px;
     background: linear-gradient(rgba(0, 0, 0, 0.7), black);
     background-blend-mode: multiply;
+    box-shadow: -10px -10px 40px 10px black, 10px 10px 40px 10px black;
 
     h2{
       color: white;
@@ -193,5 +204,10 @@ main {
 
     }
   
+  }
+
+  .services{
+    width: 100%;
+    height: 100vh;
   }
 }

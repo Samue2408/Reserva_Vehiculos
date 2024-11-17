@@ -21,7 +21,9 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ModalBookingComponent } from './shared/components/modal-booking/modal-booking.component';
 import { FormsModule } from '@angular/forms';
 import { AnimatedBackgroundComponent } from './shared/components/animated-background/animated-background.component';
-import { HomeComponent } from './home/home.component'; 
+import { HomeComponent } from './home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { HomeComponent } from './home/home.component';
     FontAwesomeModule,
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     provideClientHydration()

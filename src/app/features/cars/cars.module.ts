@@ -5,6 +5,8 @@ import { CarsRoutingModule } from './cars-routing.module';
 import { CarsComponent } from './cars.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CarDetailComponent } from './car-detail/car-detail.component';
+import { SkeletonModule } from 'primeng/skeleton';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { CarDetailComponent } from './car-detail/car-detail.component';
   imports: [
     CommonModule,
     CarsRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SkeletonModule
+
 
   ]
 })

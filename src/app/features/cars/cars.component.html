@@ -1,26 +1,99 @@
 <main class="container-main grid">
-  <div *ngFor="let car of cars; let i = index;" class="card" (click)="showCarDetail(i)">
+  <div
+    *ngFor="let car of cars; let i = index"
+    class="card"
+    (click)="showCarDetail(i, car)"
+  >
     <div class="row-1 d-flex">
-      <div class="w-100 name d-flex f-column">
-        <div class="d-flex align-center justify-between">
-          <h2>{{ car.brand }} {{ car.model }}</h2>
-          <span>"{{ car.license_plate }}"</span>
+      <div class="availability">Available</div>
+      <button (click)="toggleFavorite(car, $event)">
+        <div class="favorite-icon" [class.active]="isFavorite(car)">
+          <fa-icon [icon]="faHeart"></fa-icon>
         </div>
-        <span>{{ car.car_year }}</span>
-      </div>
+      </button>
     </div>
     <div class="row-2">
       <img [src]="car.image_path" [alt]="car.model" />
     </div>
     <div class="row-3 d-flex justify-around">
+      <div class="top">
+        <h3>{{ car.brand }}</h3>
+      </div>
+      <div class="bottom">
+        <h2>{{ car.model }}</h2>
+        <span class="price">${{ car.daily_fee }} <span>/hour</span> </span>
+      </div>
+    </div>
+    <hr />
+
+    <div class="row-4">
       <div class="left">
-        <fa-icon [icon]="faRetwet" *ngIf="car.transmission == 'Manual'"></fa-icon>
-        <fa-icon [icon]="faWandSparkles" *ngIf="car.transmission == 'Automatic'"></fa-icon>
+        <fa-icon
+          [icon]="faRetwet"
+          *ngIf="car.transmission == 'Manual'"
+        ></fa-icon>
+        <fa-icon
+          [icon]="faWandSparkles"
+          *ngIf="car.transmission == 'Automatic'"
+        ></fa-icon>
         {{ car.transmission }}
       </div>
-      <div class="price">
-        ${{ car.daily_fee }}
+      <div class="right">
+        <div class="frame">
+          <span>{{ car.license_plate }}</span>
+        </div>
       </div>
     </div>
   </div>
+  <ng-container *ngFor="let _ of [1, 2, 3, 4, 5, 6]">
+    <!-- Skeleton Loader de la Card -->
+    <div class="card-skeleton" *ngIf="loadingCars">
+      <!-- Fila 1 (Disponibilidad + Corazón) -->
+      <div class="row-1">
+        <p-skeleton
+          styleClass="mt-4"
+          [ngStyle]="{ 'margin-left': '30px' }"
+          width="90px"
+          height="30px"
+          styleClass="mb-2"
+        ></p-skeleton>
+        <p-skeleton
+          width="20px"
+          height="20px"
+          styleClass="mt-4"
+          [ngStyle]="{ 'border-radius': '50%', 'margin-right': '10px' }"
+        ></p-skeleton>
+      </div>
+
+      <!-- Fila 2 (Imagen) -->
+      <div class="row-2">
+        <p-skeleton height="128px" width="250px" styleClass="mb-2"></p-skeleton>
+      </div>
+
+      <!-- Fila 3 (Marca, Modelo y Precio) -->
+      <div class="row-3 d-flex justify-around">
+        <div class="top" [ngStyle]="{ 'margin-top': '10px' }">
+          <p-skeleton width="20%" height="15px" styleClass="mb-2"></p-skeleton>
+        </div>
+        <div class="bottom" [ngStyle]="{ 'margin-top': '5px' }">
+          <p-skeleton
+            width="140px"
+            height="20px"
+            styleClass="mb-2"
+          ></p-skeleton>
+          <p-skeleton
+            width="100px"
+            height="20px"
+            styleClass="mb-2"
+          ></p-skeleton>
+        </div>
+      </div>
+
+      <!-- Fila 4 (Transmisión y Botón de Rentar) -->
+      <div class="row-4">
+        <p-skeleton width="100px" height="15px" styleClass="mb-2"></p-skeleton>
+        <p-skeleton width="150px" height="35px" styleClass="mb-2"></p-skeleton>
+      </div>
+    </div>
+  </ng-container>
 </main>

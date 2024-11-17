@@ -7,12 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: CarsComponent,
-    children: [
-      {
-        path: 'carDetail/:id',
-        component: CarDetailComponent,
-      },
-    ],
   },
 ];
 

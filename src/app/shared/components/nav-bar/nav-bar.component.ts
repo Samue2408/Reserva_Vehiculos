@@ -13,6 +13,7 @@ export class NavBarComponent implements OnInit {
   faBars = faBars;
 
   @Input() cssClass!: string;
+  @Input() isHomeView!: boolean;
 
   ngOnInit(): void {
     document.querySelector('.nav')?.classList.add(this.cssClass);

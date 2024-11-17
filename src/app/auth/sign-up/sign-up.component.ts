@@ -5,6 +5,7 @@ import {
   faExclamationTriangle,
   faEye,
   faEyeSlash,
+  faInfo,
   faLock,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
@@ -26,6 +27,7 @@ export class SignUpComponent implements OnInit {
   faEyeSlash = faEyeSlash;
   faUser = faUser;
   faWarning = faExclamationTriangle;
+  faInfo = faInfo;
 
   // Controllers
   showPassword = false;
@@ -42,7 +44,7 @@ export class SignUpComponent implements OnInit {
   password: string = '';
 
   constructor(
-    private _userService: UsersService, 
+    private _userService: UsersService,
     private router: Router,
     private authService: AuthService
   ) {}
@@ -55,24 +57,28 @@ export class SignUpComponent implements OnInit {
 
   onSubmit(): void {
     if (this.fullName && this.email && this.password) {
-      const userData = {
-        c_name: this.fullName,
-        email: this.email,
-        password: this.password,
-        role_id: 4,
-      };
+      if (this.strengthLevel >= 5) {
+        const userData = {
+          c_name: this.fullName,
+          email: this.email,
+          password: this.password,
+          role_id: 4,
+        };
 
-      this._userService.addUser(userData).subscribe({
-        next: (response) => {
-          console.log('Usuario registrado exitosamente', response);
-          this.router.navigate(['/login']);
-        },
-        error: (err) => {
-          this.errorUser = true;
-          console.error('Error al registrar el usuario', err);
-        },
-      });
-    }else{
+        this._userService.addUser(userData).subscribe({
+          next: (response) => {
+            console.log('Usuario registrado exitosamente', response);
+            this.router.navigate(['/login']);
+          },
+          error: (err) => {
+            this.errorUser = true;
+            console.error('Error al registrar el usuario', err);
+          },
+        });
+      }else{
+        return;
+      }
+    } else {
       this.emptyFields = true;
       setTimeout(() => {
         this.emptyFields = false;
@@ -80,9 +86,10 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  validateEmail(email: string){
-    if(!email) return this.validateEmailController = true;
-    return this.validateEmailController = this.authService.validateEmail(email);
+  validateEmail(email: string) {
+    if (!email) return (this.validateEmailController = true);
+    return (this.validateEmailController =
+      this.authService.validateEmail(email));
   }
 
   validateSecurePassword(password: string): void {
@@ -134,5 +141,4 @@ export class SignUpComponent implements OnInit {
     }
     return '';
   }
-
 }

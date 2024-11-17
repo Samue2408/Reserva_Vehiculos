@@ -12,7 +12,7 @@ import { LogOutComponent } from './auth/log-out/log-out.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 
-const routes: Routes = [  
+const routes: Routes = [
   {
     path: 'main',
     component: MainComponent,
@@ -29,7 +29,8 @@ const routes: Routes = [
       },
       {
         path: 'cars',
-        loadChildren: ()=> import('./features/cars/cars.module').then(m=> m.CarsModule)
+        loadChildren: () =>
+          import('./features/cars/cars.module').then((m) => m.CarsModule),
       },
       {
         path: 'booking',
@@ -51,23 +52,29 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: ()=> import('./auth/login/login.module').then(m => m.LoginModule)
+    loadChildren: () =>
+      import('./auth/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'sign-up',
-    loadChildren: ()=> import('./auth/sign-up/sign-up.module').then(m=>m.SignUpModule)
+    loadChildren: () =>
+      import('./auth/sign-up/sign-up.module').then((m) => m.SignUpModule),
   },
   {
     path: 'log-out',
-    component: LogOutComponent
+    component: LogOutComponent,
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+  },
+  {
+    path: 'carDetail/:id',
+    component: CarDetailComponent,
   },
   {
     path: '**',
-    redirectTo: 'main/dashboard',
+    redirectTo: '/home',
     pathMatch: 'full',
   },
 ];

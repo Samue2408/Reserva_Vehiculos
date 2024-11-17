@@ -1,0 +1,192 @@
+.grid {
+  background-color: #f2f3f5;
+  width: 100%;
+  height: 100vh;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 10px;
+  grid-template-areas:
+    "header      header"
+    "car         financing "
+    "car         financing "
+    "car         financing "
+    "overview    financing "
+    "overview    financing "
+    "overview    financing ";
+
+  & > * {
+    background-color: #ffffff;
+    border: 1px solid rgb(219, 219, 219);
+  }
+
+  .header {
+    width: 100%;
+    grid-area: header;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: inherit;
+
+    .left {
+      width: 20%;
+      height: auto;
+      display: flex;
+      align-items: start;
+      flex-direction: column;
+      justify-content: center;
+
+      h2,
+      h4 {
+        margin: 2px;
+      }
+
+      h4 {
+        color: rgb(208, 208, 208);
+        font-size: 13px;
+      }
+
+      h2 {
+        font-weight: 700;
+        color: rgb(141, 141, 141);
+      }
+
+      span {
+        color: rgb(208, 208, 208);
+        font-size: 14px;
+      }
+    }
+
+    .center {
+      width: 60%;
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .child {
+        height: 45%;
+        width: calc(100% / 5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        h2 {
+          margin: 0;
+          font-size: 13px;
+        }
+
+        h2:first-of-type {
+          color: rgb(141, 141, 141);
+        }
+
+        h2:last-of-type {
+          color: rgb(180, 180, 180);
+
+          fa-icon {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+
+    .right {
+      width: 30%;
+      height: 80%;
+      display: flex;
+      align-items: center;
+      border-left: 1px solid rgb(219, 219, 219);
+
+      .child {
+        height: 70%;
+        width: calc(100% / 2);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+
+        h2 {
+          margin: 0;
+          font-size: 13px;
+        }
+
+        h2:first-of-type {
+          width: auto;
+          color: rgb(141, 141, 141);
+        }
+
+        h2:last-of-type {
+          font-weight: 700;
+          font-size: 18px;
+          color: rgb(22, 22, 22);
+
+          fa-icon {
+            font-size: 10px;
+          }
+        }
+      }
+
+      .button {
+        button {
+          cursor: pointer;
+          height: 35px;
+          width: 80%;
+          border: none;
+          outline: none;
+          color: white;
+          border-radius: 5px;
+          background-color: rgb(0, 215, 165);
+          transition: 0.5s ease;
+
+          &:hover {
+            background-color: rgb(0, 164, 126);
+          }
+        }
+      }
+    }
+  }
+
+  .car {
+    width: 100%;
+    grid-area: car;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      animation: scaleLow 1s ease-in-out;
+    }
+  }
+
+  .financing {
+    width: 100%;
+    grid-area: financing;
+    border-radius: 10px;
+  }
+
+  .overview {
+    width: 100%;
+    grid-area: overview;
+    border-radius: 10px;
+  }
+}
+
+@keyframes scaleLow {
+  0% {
+    opacity: 0.6;
+    transform: scale(1.15);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

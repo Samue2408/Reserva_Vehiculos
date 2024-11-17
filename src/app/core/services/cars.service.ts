@@ -24,7 +24,16 @@ interface Car {
 export class CarService {
   private myAppUrl: string;
   private myApiUrl: string;
+  private selectedCar: any;
 
+
+  setSelectedCar(car: any): void {
+    this.selectedCar = car;
+  }
+
+  getSelectedCar(): any {
+    return this.selectedCar;
+  }
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = 'api/cars/';

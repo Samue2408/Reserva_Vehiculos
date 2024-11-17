@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   errorCredentials: boolean = false;
+  emptyFields!: boolean;
 
   // Icons
   faArrow = faArrowRight;
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           localStorage.setItem("Token", response.token)
           console.log('Inicio de sesion Exitoso', response);
-          this.router.navigate(['/']);
+          this.router.navigate(['/main/dashboard']);
         },
         error: (err) => {
           this.errorCredentials = true;
@@ -54,6 +55,13 @@ export class LoginComponent implements OnInit {
       });
     } else {
       this.errorCredentials = false
+    }
+
+    if(this.email === '' || this.password === ''){
+      this.emptyFields = true
+      setTimeout(() => {
+          this.emptyFields = false;
+      }, 4000);
     }
   }
 
