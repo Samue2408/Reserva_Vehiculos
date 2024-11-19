@@ -1,1 +1,78 @@
-<p>favorites works!</p>
+<main class="container-main grid" [ngClass]="{'flex': !loadingCars && carsService.favorites.length === 0}">
+  <ng-container *ngIf="loadingCars">
+    <div class="card-skeleton" *ngFor="let _ of [1, 2, 3, 4, 5, 6]">
+      <!-- Fila 1 (Disponibilidad) -->
+      <div class="row-1">
+        <p-skeleton width="90px" height="30px"></p-skeleton>
+      </div>
+
+      <!-- Fila 2 (Imagen) -->
+      <div class="row-2">
+        <p-skeleton height="128px" width="250px"></p-skeleton>
+      </div>
+
+      <!-- Fila 3 (Marca, Modelo y Precio) -->
+      <div class="row-3 d-flex justify-around">
+        <div class="top">
+          <p-skeleton width="20%" height="15px"></p-skeleton>
+        </div>
+        <div class="bottom">
+          <p-skeleton width="140px" height="20px"></p-skeleton>
+          <p-skeleton width="100px" height="20px"></p-skeleton>
+        </div>
+      </div>
+
+      <!-- Fila 4 (Transmisión y Placa) -->
+      <div class="row-4">
+        <p-skeleton width="100px" height="15px"></p-skeleton>
+        <p-skeleton width="150px" height="35px"></p-skeleton>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!loadingCars && carsService.favorites.length > 0">
+    <div
+      *ngFor="let car of carsService.favorites; let i = index"
+      class="card"
+    >
+      <div class="row-1 d-flex">
+        <div class="availability">Available</div>
+      </div>
+      <div class="row-2">
+        <img [src]="car.image_path" [alt]="car.model" />
+      </div>
+      <div class="row-3 d-flex justify-around">
+        <div class="top">
+          <h3>{{ car.brand }}</h3>
+        </div>
+        <div class="bottom">
+          <h2>{{ car.model }}</h2>
+          <span class="price">${{ car.daily_fee }} <span>/hour</span></span>
+        </div>
+      </div>
+      <hr />
+      <div class="row-4">
+        <div class="left">
+          <fa-icon
+            [icon]="faRetwet"
+            *ngIf="car.transmission == 'Manual'"
+          ></fa-icon>
+          <fa-icon
+            [icon]="faWandSparkles"
+            *ngIf="car.transmission == 'Automatic'"
+          ></fa-icon>
+          {{ car.transmission }}
+        </div>
+        <div class="right">
+          <div class="frame">
+            <span>{{ car.license_plate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <span *ngIf="!loadingCars && carsService.favorites.length === 0">
+    ¡No tiene autos favoritos aún! Agregue unos 😎.
+  </span>
+</main>

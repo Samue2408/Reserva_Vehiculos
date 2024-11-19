@@ -11,7 +11,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 @NgModule({
   declarations: [
     CarsComponent,
-    CarDetailComponent
+    CarDetailComponent,
   ],
   imports: [
     CommonModule,

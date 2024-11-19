@@ -16,7 +16,6 @@ import { Router } from '@angular/router';
 export class CarsComponent implements OnInit {
   cars: any;
   loadingCars: boolean = true;
-  favorites: any[] = [];
 
   //icons
   faHeart = faHeart;
@@ -24,7 +23,7 @@ export class CarsComponent implements OnInit {
   faRetwet = faRetweet;
   faWandSparkles = faWandSparkles;
 
-  constructor(private carsService: CarService, private router: Router) {}
+  constructor(public carsService: CarService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllCars();
@@ -33,7 +32,7 @@ export class CarsComponent implements OnInit {
   getAllCars() {
     this.carsService.getAllCars().subscribe({
       next: (response) => {
-        this.cars = response;
+        this.carsService.cars = response;
         this.loadingCars = false;
         this.incluidePointLicense(response);
       },
@@ -65,16 +64,15 @@ export class CarsComponent implements OnInit {
 
   toggleFavorite(car: any, event: Event): void {
     event.stopPropagation();
-    console.log(this.favorites);
 
     if (this.isFavorite(car)) {
-      this.favorites = this.favorites.filter((fav) => fav !== car);
+      this.carsService.favorites = this.carsService.favorites.filter((fav) => fav !== car);
     } else {
-      this.favorites.push(car);
+      this.carsService.favorites.push(car);
     }
   }
 
   isFavorite(car: any): boolean {
-    return this.favorites.includes(car);
+    return this.carsService.favorites.includes(car);
   }
 }

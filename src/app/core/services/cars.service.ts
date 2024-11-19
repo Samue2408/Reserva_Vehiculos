@@ -15,6 +15,7 @@ interface Car {
   daily_fee: number;          // Tarifa diaria (DECIMAL(10, 2))
   seats: number;              // Número de asientos (INT)
   image_path: string;         // Ruta de la imagen (VARCHAR(255))
+  transmission: string;       // Transmisión del auto (VARCHAR(255))
 }
 
 @Injectable({
@@ -25,6 +26,8 @@ export class CarService {
   private myAppUrl: string;
   private myApiUrl: string;
   private selectedCar: any;
+  public cars: Car[] = [];
+  public favorites: Car[] = [];
 
 
   setSelectedCar(car: any): void {

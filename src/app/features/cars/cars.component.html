@@ -1,6 +1,6 @@
 <main class="container-main grid">
   <div
-    *ngFor="let car of cars; let i = index"
+    *ngFor="let car of carsService.cars; let i = index"
     class="card"
     (click)="showCarDetail(i, car)"
   >

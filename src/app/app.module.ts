@@ -18,11 +18,11 @@ import { CardComponent } from './shared/components/card/card.component';
 import { SettingsComponent } from './features/settings/settings.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { ModalBookingComponent } from './shared/components/modal-booking/modal-booking.component';
 import { FormsModule } from '@angular/forms';
 import { AnimatedBackgroundComponent } from './shared/components/animated-background/animated-background.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 @NgModule({
@@ -40,7 +40,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SettingsComponent,
     LoginComponent,
     SignUpComponent,
-    ModalBookingComponent,
     AnimatedBackgroundComponent,
     HomeComponent,
   ],
@@ -52,6 +51,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SkeletonModule
+
   ],
   providers: [
     provideClientHydration()

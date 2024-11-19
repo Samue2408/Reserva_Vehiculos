@@ -17,11 +17,17 @@ export class CarDetailComponent implements OnInit {
   faRetwet = faRetweet;
   faWandSparkles = faWandSparkles;
 
+  showModal: boolean = false;
+
   constructor(private route: ActivatedRoute, private carService: CarService){}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.car = this.carService.getSelectedCar(); 
+  }
+
+  openModal(){
+    this.showModal = true;
   }
 
 }

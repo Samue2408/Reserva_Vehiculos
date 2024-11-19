@@ -29,6 +29,10 @@
           <h2>Type</h2>
           <h2>{{ car.car_type }}</h2>
         </div>
+        <div class="child licence">
+          <h2>License plate</h2>
+          <h2>{{ car.license_plate }}</h2>
+        </div>
         <div class="child seats">
           <h2>Seats</h2>
           <h2>{{ car.seats }}</h2>
@@ -40,7 +44,7 @@
           <h2>{{ car.daily_fee }} <span>/hour</span></h2>
         </div>
         <div class="child button">
-          <button>Rent</button>
+          <button (click)="openModal()">Rent</button>
         </div>
       </div>
     </header>
