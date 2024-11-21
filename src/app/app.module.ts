@@ -7,7 +7,6 @@ import { MainComponent } from './main/main.component';
 import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
 import { LeftMenuComponent } from './shared/components/left-menu/left-menu.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { CarsComponent } from './features/cars/cars.component';
 import { BookingComponent } from './features/booking/booking.component';
 import { FavoritesComponent } from './features/favorites/favorites.component';
 import { CustomersComponent } from './features/customers/customers.component';

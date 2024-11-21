@@ -4,6 +4,7 @@ import {
   faCartShopping,
   faHeart,
   faRetweet,
+  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
@@ -16,23 +17,28 @@ import { Router } from '@angular/router';
 export class CarsComponent implements OnInit {
   cars: any;
   loadingCars: boolean = true;
+  showModalRent: boolean = false;
+  selectedCarLicensePlate: string = '';
 
   //icons
   faHeart = faHeart;
   faShopping = faCartShopping;
   faRetwet = faRetweet;
   faWandSparkles = faWandSparkles;
+  faX = faXmark
 
-  constructor(public carsService: CarService, private router: Router) {}
+  constructor(
+    public carService: CarService, 
+    private router: Router) {}
 
   ngOnInit(): void {
     this.getAllCars();
   }
 
   getAllCars() {
-    this.carsService.getAllCars().subscribe({
+    this.carService.getAllCars().subscribe({
       next: (response) => {
-        this.carsService.cars = response;
+        this.carService.cars = response;
         this.loadingCars = false;
         this.incluidePointLicense(response);
       },
@@ -58,7 +64,7 @@ export class CarsComponent implements OnInit {
     const selectedCard = cards[index];
     await selectedCard?.classList.add('motion');
 
-    this.carsService.setSelectedCar(car);
+    this.carService.setSelectedCar(car);
     this.router.navigate([`/carDetail/${index}`]);
   }
 
@@ -66,13 +72,32 @@ export class CarsComponent implements OnInit {
     event.stopPropagation();
 
     if (this.isFavorite(car)) {
-      this.carsService.favorites = this.carsService.favorites.filter((fav) => fav !== car);
+      this.carService.favorites = this.carService.favorites.filter((fav) => fav !== car);
     } else {
-      this.carsService.favorites.push(car);
+      this.carService.favorites.push(car);
     }
   }
 
   isFavorite(car: any): boolean {
-    return this.carsService.favorites.includes(car);
+    return this.carService.favorites.includes(car);
+  }
+
+  onSubmit(form: any) {
+    if (form.valid) {
+      console.log('Reserva realizada');
+      form.reset();
+    } else {
+      console.log('No se hizo')
+    }
+  }
+
+  openModalRent(e: Event, car: any): void{
+    e.stopPropagation()
+    this.selectedCarLicensePlate = car.license_plate;  
+    this.showModalRent = true;
+  }
+
+  cancelModal(){
+    this.showModalRent = false;
   }
 }

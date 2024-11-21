@@ -1,6 +1,7 @@
 <main class="container-main grid">
+  <!--Grid cars-->
   <div
-    *ngFor="let car of carsService.cars; let i = index"
+    *ngFor="let car of carService.cars; let i = index"
     class="card"
     (click)="showCarDetail(i, car)"
   >
@@ -37,14 +38,22 @@
           *ngIf="car.transmission == 'Automatic'"
         ></fa-icon>
         {{ car.transmission }}
+        <div class="license">
+          <div class="frame">
+            <span>{{ car.license_plate }}</span>
+          </div>
+        </div>
       </div>
       <div class="right">
-        <div class="frame">
-          <span>{{ car.license_plate }}</span>
-        </div>
+        <button (click)="openModalRent($event, car)">
+          Rent
+          <fa-icon [icon]="faShopping"></fa-icon>
+        </button>
       </div>
     </div>
   </div>
+
+  <!--Skeleton cars-->
   <ng-container *ngFor="let _ of [1, 2, 3, 4, 5, 6]">
     <!-- Skeleton Loader de la Card -->
     <div class="card-skeleton" *ngIf="loadingCars">
@@ -96,4 +105,155 @@
       </div>
     </div>
   </ng-container>
+
+  <!--Modal rent-->
+  <div class="modal-overlay" *ngIf="showModalRent">
+    <div class="car-rental-container">
+      <button class="cancel-button" (click)="cancelModal()">
+        <fa-icon [icon]="faX"></fa-icon>
+      </button>
+      <h2 class="form-title">Rentar un Auto</h2>
+      <form #rentalForm="ngForm" (ngSubmit)="onSubmit(rentalForm)">
+        <div class="form-group">
+          <label for="l_plate">Placa del Auto</label>
+          <input
+            id="l_plate"
+            name="l_plate"
+            type="text"
+            class="form-control"
+            readonly
+            disabled=""
+            [(ngModel)]="selectedCarLicensePlate" 
+          />
+          <div
+            class="error"
+            *ngIf="
+              rentalForm.controls['l_plate']?.invalid &&
+              rentalForm.controls['l_plate']?.touched
+            "
+          >
+            La placa es requerida y debe tener entre 7 y 10 caracteres.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="c_id">ID del Cliente</label>
+          <input
+            id="c_id"
+            name="c_id"
+            type="text"
+            class="form-control"
+            required
+            ngModel
+          />
+          <div
+            class="error"
+            *ngIf="
+              rentalForm.controls['c_id']?.invalid &&
+              rentalForm.controls['c_id']?.touched
+            "
+          >
+            El ID del cliente es requerido.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="start_date">Fecha de Inicio</label>
+          <input
+            id="start_date"
+            name="start_date"
+            type="date"
+            class="form-control"
+            required
+            ngModel
+          />
+          <div
+            class="error"
+            *ngIf="
+              rentalForm.controls['start_date']?.invalid &&
+              rentalForm.controls['start_date']?.touched
+            "
+          >
+            La fecha de inicio es requerida.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="end_date">Fecha de Fin</label>
+          <input
+            id="end_date"
+            name="end_date"
+            type="date"
+            class="form-control"
+            required
+            ngModel
+          />
+          <div
+            class="error"
+            *ngIf="
+              rentalForm.controls['end_date']?.invalid &&
+              rentalForm.controls['end_date']?.touched
+            "
+          >
+            La fecha de fin es requerida.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="b_status">Estado de Reserva</label>
+          <select
+            id="b_status"
+            name="b_status"
+            class="form-control"
+            required
+            ngModel
+          >
+            <option value="" disabled selected>Seleccione un estado</option>
+            <option value="active">Activo</option>
+            <option value="cancelled">Cancelado</option>
+            <option value="completed">Completado</option>
+          </select>
+          <div
+            class="error"
+            *ngIf="
+              rentalForm.controls['b_status']?.invalid &&
+              rentalForm.controls['b_status']?.touched
+            "
+          >
+            El estado de reserva es requerido.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="total_cost">Costo Total</label>
+          <input
+            id="total_cost"
+            name="total_cost"
+            type="number"
+            class="form-control"
+            required
+            min="0"
+            ngModel
+          />
+          <div
+            class="error"
+            *ngIf="
+              rentalForm.controls['total_cost']?.invalid &&
+              rentalForm.controls['total_cost']?.touched
+            "
+          >
+            El costo total es requerido y debe ser mayor o igual a 0.
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="rentalForm.invalid"
+        >
+          Reservar
+        </button>
+      </form>
+    </div>
+  </div>
 </main>

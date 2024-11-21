@@ -6,6 +6,7 @@ import { CarsComponent } from './cars.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CarDetailComponent } from './car-detail/car-detail.component';
 import { SkeletonModule } from 'primeng/skeleton';
+import { FormsModule, NgForm } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SkeletonModule } from 'primeng/skeleton';
     CommonModule,
     CarsRoutingModule,
     FontAwesomeModule,
-    SkeletonModule
+    SkeletonModule,
+    FormsModule
 
 
   ]

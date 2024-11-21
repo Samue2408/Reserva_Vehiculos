@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../../../core/services/cars.service';
 import { faRetweet, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,15 +19,18 @@ export class CarDetailComponent implements OnInit {
 
   showModal: boolean = false;
 
-  constructor(private route: ActivatedRoute, private carService: CarService){}
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router,
+    private carService: CarService){}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.car = this.carService.getSelectedCar(); 
   }
 
-  openModal(){
-    this.showModal = true;
+  rentCar(){
+    this.router.navigate(['/rent'])
   }
 
 }
