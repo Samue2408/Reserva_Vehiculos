@@ -9,6 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { FavoritesService } from '../../core/services/favorites.service';
 
 @Component({
   selector: 'app-cars',
@@ -34,7 +35,12 @@ export class CarsComponent implements OnInit {
   faX = faXmark;
   faFilter = faFilter;
 
-  constructor(public carService: CarService, private router: Router) {}
+  constructor(
+    public carService: CarService, 
+    private router: Router,
+    public favoriteService: FavoritesService) {
+
+    }
 
   ngOnInit(): void {
     this.getAllCars();
@@ -43,10 +49,27 @@ export class CarsComponent implements OnInit {
   getAllCars() {
     this.carService.getAllCars().subscribe({
       next: (response) => {
-        this.carService.cars = response;
-        this.filteredCars = response;
-        this.loadingCars = false;
+        // obitiene los carros de la bd y los guarda en el array del servicio
+        this.filteredCars = response
+        this.carService.cars = response
+        // date actual
+        const date = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`        
+
+        // mapea el array de carros y les ponen si estan o no disponibles
+        this.carService.cars.map((car)=> {
+          this.carService.availableCar({start: date, end: date, license_plate: car.license_plate})
+          .subscribe(isAvailable => {
+            car.available = isAvailable[0]['is_available']
+          });
+        });
+
         this.incluidePointLicense(response);
+                
+        this.favoriteService.getFavorites(localStorage.getItem('Token') || '').subscribe(carsfav => {
+          this.carService.favorites = carsfav
+        });
+        
+        this.loadingCars = false;
       },
       error: (err) => {
         this.loadingCars = false;
@@ -75,18 +98,40 @@ export class CarsComponent implements OnInit {
 
   toggleFavorite(car: any, event: Event): void {
     event.stopPropagation();
+    const license_plate = car.license_plate.slice(0, 3) + car.license_plate.slice(4);
 
+    
     if (this.isFavorite(car)) {
-      this.carService.favorites = this.carService.favorites.filter(
-        (fav) => fav !== car
-      );
-    } else {
-      this.carService.favorites.push(car);
+      //elimina carro
+      this.favoriteService.delFavorites(license_plate).subscribe((data) =>{
+        console.log(data)
+      })
+      this.carService.favorites = this.carService.favorites.filter((fav) => fav['license_plate'] !== license_plate);
+    } else { 
+      console.log(car)
+      // agrega carro    
+      this.favoriteService.addFavorites({token: localStorage.getItem('Token') || '', licensePlate: license_plate})
+      .subscribe({
+        next: (data) => {
+          const carFavNew = { ...car }; //El operador de propagación copia las propiedades del objeto original a un nuevo objeto.
+          carFavNew['license_plate'] = license_plate;
+          console.log(car)
+          this.carService.favorites.push(carFavNew);
+          
+          console.log(data);          
+        },
+        error: (err) => {
+          console.log(err);          
+        }
+      })
+      
     }
   }
 
   isFavorite(car: any): boolean {
-    return this.carService.favorites.includes(car);
+    const license_plate = car.license_plate.slice(0, 3) + car.license_plate.slice(4);
+    
+    return this.carService.favorites.some((carfav) => carfav['license_plate'] === license_plate);
   }
 
   onSubmit(form: any) {

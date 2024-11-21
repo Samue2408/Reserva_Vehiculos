@@ -42,7 +42,10 @@
     (click)="showCarDetail(i, car)"
   >
     <div class="row-1 d-flex">
-      <div class="availability">Available</div>
+      <div class="availability">
+        <!-- Mostrar "Disponible" o "No disponible" según el estado de disponibilidad -->
+        {{ car.available ? 'Available' : 'Not Available' }}
+      </div>
       <button (click)="toggleFavorite(car, $event)">
         <div class="favorite-icon" [class.active]="isFavorite(car)">
           <fa-icon [icon]="faHeart"></fa-icon>

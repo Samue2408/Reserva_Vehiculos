@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarService } from '../../core/services/cars.service';
 import { Router } from '@angular/router';
 import { faCartShopping, faHeart, faRetweet, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
+import { FavoritesService } from '../../core/services/favorites.service';
 
 @Component({
   selector: 'app-favorites',
@@ -10,7 +11,7 @@ import { faCartShopping, faHeart, faRetweet, faWandSparkles } from '@fortawesome
 })
 export class FavoritesComponent implements OnInit {
 
-  constructor(public carsService: CarService, private router: Router){
+  constructor(public carsService: CarService, private favoriteService: FavoritesService, private router: Router){
 
   }
 
@@ -26,7 +27,10 @@ export class FavoritesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingCars = true; 
-    if (this.carsService?.favorites.length > 0) {
+    this.favoriteService.getFavorites(localStorage.getItem('Token') || '').subscribe(carsfav => {
+      this.carsService.favorites = carsfav
+    });
+    if (this.carsService?.favorites.length > 0) {      
       this.loadingCars = false; 
     } else {
       setTimeout(() => {
