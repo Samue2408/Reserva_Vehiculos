@@ -175,26 +175,6 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="c_id">ID del Cliente</label>
-          <input
-            id="c_id"
-            name="c_id"
-            type="text"
-            class="form-control"
-            required
-            ngModel
-          />
-          <div
-            class="error"
-            *ngIf="
-              rentalForm.controls['c_id']?.invalid &&
-              rentalForm.controls['c_id']?.touched
-            "
-          >
-            El ID del cliente es requerido.
-          </div>
-        </div>
 
         <div class="form-group">
           <label for="start_date">Fecha de Inicio</label>
@@ -203,8 +183,9 @@
             name="start_date"
             type="date"
             class="form-control"
+            [min]="minDate"
             required
-            ngModel
+            [(ngModel)]="startDate"
           />
           <div
             class="error"
@@ -224,8 +205,9 @@
             name="end_date"
             type="date"
             class="form-control"
+            [min]="minDate"
             required
-            ngModel
+            [(ngModel)]="endDate" 
           />
           <div
             class="error"
@@ -238,30 +220,7 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="b_status">Estado de Reserva</label>
-          <select
-            id="b_status"
-            name="b_status"
-            class="form-control"
-            required
-            ngModel
-          >
-            <option value="" disabled selected>Seleccione un estado</option>
-            <option value="active">Activo</option>
-            <option value="cancelled">Cancelado</option>
-            <option value="completed">Completado</option>
-          </select>
-          <div
-            class="error"
-            *ngIf="
-              rentalForm.controls['b_status']?.invalid &&
-              rentalForm.controls['b_status']?.touched
-            "
-          >
-            El estado de reserva es requerido.
-          </div>
-        </div>
+        
 
         <div class="form-group">
           <label for="total_cost">Costo Total</label>
@@ -270,7 +229,8 @@
             name="total_cost"
             type="number"
             class="form-control"
-            required
+            [ngModel]="costoTotal()"
+            disabled
             min="0"
             ngModel
           />

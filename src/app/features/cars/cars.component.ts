@@ -10,6 +10,7 @@ import {
 import { faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { FavoritesService } from '../../core/services/favorites.service';
+import { BookingsService } from '../../core/services/bookings.service';
 
 @Component({
   selector: 'app-cars',
@@ -21,11 +22,15 @@ export class CarsComponent implements OnInit {
   loadingCars: boolean = true;
   showModalRent: boolean = false;
   selectedCarLicensePlate: string = '';
+  selectedCarDailyFee: number = 0;
   selectedFilter: string = '';
   selectedBrand: string = '';
   selectedPrice: string = '';
   selectedType: string = '';
   filteredCars: any = [];
+  endDate: string = '';
+  startDate: string = '';
+  minDate: string; 
 
   //icons
   faHeart = faHeart;
@@ -38,8 +43,10 @@ export class CarsComponent implements OnInit {
   constructor(
     public carService: CarService, 
     private router: Router,
-    public favoriteService: FavoritesService) {
-
+    public favoriteService: FavoritesService,
+    public bookingService: BookingsService) {
+      const today = new Date();
+      this.minDate = today.toISOString().split('T')[0];
     }
 
   ngOnInit(): void {
@@ -80,7 +87,7 @@ export class CarsComponent implements OnInit {
   incluidePointLicense(response: any) {
     response.map((car: any) => {
       car.license_plate =
-        car.license_plate.slice(0, 3) + '•' + car.license_plate.slice(3);
+        car.license_plate.slice(0, 3) + '-' + car.license_plate.slice(3);
     });
   }
 
@@ -124,19 +131,42 @@ export class CarsComponent implements OnInit {
           console.log(err);          
         }
       })
-      
     }
   }
 
   isFavorite(car: any): boolean {
     const license_plate = car.license_plate.slice(0, 3) + car.license_plate.slice(4);
-    
     return this.carService.favorites.some((carfav) => carfav['license_plate'] === license_plate);
+  }
+
+  calcularDiasEntreFechas(inicio: Date, fin: Date): number {
+    const diferencia = fin.getTime() - inicio.getTime(); // Diferencia en milisegundos
+    const dias = diferencia / (1000 * 3600 * 24); // Convertir a días
+    return Math.abs(dias) + 1;
+  }
+
+  costoTotal(): number {
+    if (this.endDate && this.startDate) {
+      const dias = this.calcularDiasEntreFechas(new Date(this.startDate), new Date(this.endDate));
+      return dias * this.selectedCarDailyFee;
+    }
+    return 0; // Si no hay fechas seleccionadas, retornamos 0
   }
 
   onSubmit(form: any) {
     if (form.valid) {
-      console.log('Reserva realizada');
+      const license_plate = this.selectedCarLicensePlate.slice(0, 3) + this.selectedCarLicensePlate.slice(4);
+      this.bookingService.addBookings({d_start: this.startDate, 
+        d_end: this.endDate, 
+        id_car: license_plate, 
+        token: localStorage.getItem('Token') || ''}).subscribe({
+          next: (data) => {
+            console.log('Booking done: ', data)
+          },
+          error: (err) => {
+            console.log('error', err)
+          }
+        })
       form.reset();
     } else {
       console.log('No se hizo');
@@ -146,12 +176,14 @@ export class CarsComponent implements OnInit {
   openModalRent(e: Event, car: any): void {
     e.stopPropagation();
     this.selectedCarLicensePlate = car.license_plate;
+    this.selectedCarDailyFee = car.daily_fee;
     this.showModalRent = true;
   }
 
   cancelModal() {
     this.showModalRent = false;
   }
+  
   applyFilter() {
     this.filteredCars = this.carService.cars; 
 
