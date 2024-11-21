@@ -1,7 +1,43 @@
 <main class="container-main grid">
+
+  <div class="filter-container">
+    <select class="filter" [(ngModel)]="selectedFilter" (change)="applyFilter()">
+      <fa-icon [icon]="faFilter"></fa-icon>
+      <option value="">Seleccionar filtro</option>
+      <option value="brand">Brand</option>
+      <option value="type">Type</option>
+      <option value="price">Price</option>
+      <option value="all">All</option>
+    </select>
+    
+    <div *ngIf="selectedFilter === 'brand'">
+      <select [(ngModel)]="selectedBrand" (change)="applyFilter()">
+        <option value="">Select brand</option>
+        <option *ngFor="let brand of carService.cars" [value]="brand.brand">{{ brand.brand }}</option>
+      </select>
+    </div>
+
+    <div *ngIf="selectedFilter === 'type'">
+      <select [(ngModel)]="selectedType" (change)="applyFilter()">
+        <option value="">Select brand</option>
+        <option *ngFor="let brand of carService.cars" [value]="brand.car_type">{{ brand.car_type }}</option>
+      </select>
+    </div>
+  
+    <div *ngIf="selectedFilter === 'price'">
+      <select [(ngModel)]="selectedPrice" (change)="applyFilter()">
+        <option value="">Select price range</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+  </div>
+  
+
   <!--Grid cars-->
   <div
-    *ngFor="let car of carService.cars; let i = index"
+    *ngFor="let car of filteredCars; let i = index"
     class="card"
     (click)="showCarDetail(i, car)"
   >

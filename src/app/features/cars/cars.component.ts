@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarService } from '../../core/services/cars.service';
 import {
   faCartShopping,
+  faFilter,
   faHeart,
   faRetweet,
   faXmark,
@@ -19,17 +20,21 @@ export class CarsComponent implements OnInit {
   loadingCars: boolean = true;
   showModalRent: boolean = false;
   selectedCarLicensePlate: string = '';
+  selectedFilter: string = '';
+  selectedBrand: string = '';
+  selectedPrice: string = '';
+  selectedType: string = '';
+  filteredCars: any = [];
 
   //icons
   faHeart = faHeart;
   faShopping = faCartShopping;
   faRetwet = faRetweet;
   faWandSparkles = faWandSparkles;
-  faX = faXmark
+  faX = faXmark;
+  faFilter = faFilter;
 
-  constructor(
-    public carService: CarService, 
-    private router: Router) {}
+  constructor(public carService: CarService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllCars();
@@ -39,6 +44,7 @@ export class CarsComponent implements OnInit {
     this.carService.getAllCars().subscribe({
       next: (response) => {
         this.carService.cars = response;
+        this.filteredCars = response;
         this.loadingCars = false;
         this.incluidePointLicense(response);
       },
@@ -50,11 +56,10 @@ export class CarsComponent implements OnInit {
 
   incluidePointLicense(response: any) {
     response.map((car: any) => {
-      car.license_plate = car.license_plate.slice(0, 3) + '•' + car.license_plate.slice(3);
+      car.license_plate =
+        car.license_plate.slice(0, 3) + '•' + car.license_plate.slice(3);
     });
   }
-
-
 
   async showCarDetail(index: number, car: any) {
     const cards = document.querySelectorAll('.card');
@@ -72,7 +77,9 @@ export class CarsComponent implements OnInit {
     event.stopPropagation();
 
     if (this.isFavorite(car)) {
-      this.carService.favorites = this.carService.favorites.filter((fav) => fav !== car);
+      this.carService.favorites = this.carService.favorites.filter(
+        (fav) => fav !== car
+      );
     } else {
       this.carService.favorites.push(car);
     }
@@ -87,17 +94,50 @@ export class CarsComponent implements OnInit {
       console.log('Reserva realizada');
       form.reset();
     } else {
-      console.log('No se hizo')
+      console.log('No se hizo');
     }
   }
 
-  openModalRent(e: Event, car: any): void{
-    e.stopPropagation()
-    this.selectedCarLicensePlate = car.license_plate;  
+  openModalRent(e: Event, car: any): void {
+    e.stopPropagation();
+    this.selectedCarLicensePlate = car.license_plate;
     this.showModalRent = true;
   }
 
-  cancelModal(){
+  cancelModal() {
     this.showModalRent = false;
+  }
+  applyFilter() {
+    this.filteredCars = this.carService.cars; 
+
+    if(this.selectedFilter === 'all'){
+      this.filteredCars = this.carService.cars;
+    }
+
+    if (this.selectedFilter === 'brand' && this.selectedBrand) {
+      this.filteredCars = this.filteredCars.filter(
+        (car: any) => car.brand === this.selectedBrand
+      );
+    }
+
+    if(this.selectedFilter === 'type' && this.selectedType){
+      this.filteredCars = this.filteredCars.filter(
+        (car: any)=> car.car_type === this.selectedType
+      )
+    }
+
+    if (this.selectedFilter === 'price' && this.selectedPrice) {
+      if (this.selectedPrice === 'low') {
+        this.filteredCars = this.filteredCars.filter((car: any) => car.daily_fee < 50);
+      } else if (this.selectedPrice === 'medium') {
+        this.filteredCars = this.filteredCars.filter(
+          (car: any) => car.daily_fee >= 50 && car.daily_fee < 100
+        );
+      } else if (this.selectedPrice === 'high') {
+        this.filteredCars = this.filteredCars.filter((car: any) => car.daily_fee >= 100);
+      }
+    }
+
+    this.filteredCars = this.filteredCars; 
   }
 }
