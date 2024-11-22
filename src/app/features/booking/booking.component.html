@@ -1,8 +1,43 @@
 <main class="flex">
-    <div class="booking" *ngFor="let _ of [1,2,3,4,5,6,7,8,9,10]">
-        
+    <div
+      class="booking"
+      *ngFor="let booking of bookings"
+      [ngClass]="getBookingClass(booking.b_status)"
+    >
+      <div class="header">
+        <div class="icon">
+          <img [src]="booking.image_path" alt="">
+        </div>
+        <h3>{{ booking.license_plate }}</h3>
+        <button>
+          <fa-icon [icon]="faDelete"></fa-icon>
+        </button>
+      </div>
+      <div class="details">
+        <p>
+          <span class="label">Cliente:</span> {{ booking.nombre }}
+        </p>
+        <p>
+          <span class="label">Inicio:</span> {{ booking.start_date | formatDate}}
+        </p>
+        <p>
+          <span class="label">Fin:</span> {{ booking.end_date | formatDate}}
+        </p>
+        <p>
+          <span class="label">Costo total:</span> ${{ booking.total_cost }}
+        </p>
+      </div>
+      <div class="footer">
+        <span class="badge">{{ booking.b_status }}</span>
+        <span
+          *ngIf="booking.b_status === 'Pendiente'"
+          class="status-info"
+          >Apartado</span
+        >
+      </div>
     </div>
-    <ng-container *ngFor="let _ of[1,2,3,4,5,6,7,8,9]">
-        <p-skeleton width="100%" height="120px" />
+    <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]">
+      <p-skeleton width="100%" height="140px"></p-skeleton>
     </ng-container>
-</main>
+  </main>
+  

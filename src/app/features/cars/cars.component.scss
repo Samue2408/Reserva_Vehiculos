@@ -102,11 +102,10 @@
       justify-content: space-between;
       padding: 0 5px;
 
-      .availability {
+      .container-availability {
         width: 20%;
         height: 100%;
         border: none;
-        background-color: rgb(213, 255, 213);
         color: white;
         display: flex;
         align-items: center;
@@ -115,6 +114,15 @@
         border-radius: 2px;
         color: green;
         font-weight: 700;
+      }
+
+      .availability {
+        background-color: rgb(213, 255, 213);
+      }
+
+      .no-availability{
+        color: rgb(241, 89, 89);
+        background-color: rgb(255, 213, 213);
       }
 
       button {
@@ -441,6 +449,107 @@
 
       &:hover {
         background-color: #039775;
+      }
+    }
+  }
+
+  .modal-sucess {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    #success_tic {
+      .page-body {
+        height: 320px;
+        min-width: 500px;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 4px 4px 10px gray, -4px -4px 10px gray;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        .head {
+          text-align: center;
+        }
+      }
+
+      .close {
+        opacity: 1;
+        position: absolute;
+        right: 0;
+        font-size: 30px;
+        padding: 3px 15px;
+        margin-bottom: 10px;
+      }
+
+      .checkmark-circle {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .background {
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          background: #1ab394;
+          position: absolute;
+        }
+
+        .checkmark {
+          border-radius: 5px;
+
+          &.draw:after {
+            animation: checkmark 1s ease forwards;
+            transform: scaleX(-1) rotate(135deg);
+            animation-delay: 300ms;
+            content: "";
+            position: absolute;
+            left: 35px;
+            top: 80px;
+            width: 37.5px;
+            height: 75px;
+            border-right: 15px solid #fff;
+            border-top: 15px solid #fff;
+            border-radius: 2.5px !important;
+          }
+        }
+      }
+    }
+    @keyframes checkmark {
+      0% {
+        height: 0;
+        width: 0;
+        opacity: 1;
+      }
+      20% {
+        height: 0;
+        width: 37.5px;
+        opacity: 1;
+      }
+      40% {
+        height: 75px;
+        width: 37.5px;
+        opacity: 1;
+      }
+      100% {
+        height: 75px;
+        width: 37.5px;
+        opacity: 1;
       }
     }
   }

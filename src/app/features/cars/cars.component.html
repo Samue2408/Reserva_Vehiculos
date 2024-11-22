@@ -1,7 +1,10 @@
 <main class="container-main grid">
-
   <div class="filter-container">
-    <select class="filter" [(ngModel)]="selectedFilter" (change)="applyFilter()">
+    <select
+      class="filter"
+      [(ngModel)]="selectedFilter"
+      (change)="applyFilter()"
+    >
       <fa-icon [icon]="faFilter"></fa-icon>
       <option value="">Seleccionar filtro</option>
       <option value="brand">Brand</option>
@@ -9,21 +12,25 @@
       <option value="price">Price</option>
       <option value="all">All</option>
     </select>
-    
+
     <div *ngIf="selectedFilter === 'brand'">
       <select [(ngModel)]="selectedBrand" (change)="applyFilter()">
         <option value="">Select brand</option>
-        <option *ngFor="let brand of carService.cars" [value]="brand.brand">{{ brand.brand }}</option>
+        <option *ngFor="let brand of carService.cars" [value]="brand.brand">
+          {{ brand.brand }}
+        </option>
       </select>
     </div>
 
     <div *ngIf="selectedFilter === 'type'">
       <select [(ngModel)]="selectedType" (change)="applyFilter()">
         <option value="">Select brand</option>
-        <option *ngFor="let brand of carService.cars" [value]="brand.car_type">{{ brand.car_type }}</option>
+        <option *ngFor="let brand of carService.cars" [value]="brand.car_type">
+          {{ brand.car_type }}
+        </option>
       </select>
     </div>
-  
+
     <div *ngIf="selectedFilter === 'price'">
       <select [(ngModel)]="selectedPrice" (change)="applyFilter()">
         <option value="">Select price range</option>
@@ -33,7 +40,6 @@
       </select>
     </div>
   </div>
-  
 
   <!--Grid cars-->
   <div
@@ -42,9 +48,9 @@
     (click)="showCarDetail(i, car)"
   >
     <div class="row-1 d-flex">
-      <div class="availability">
+      <div class="container-availability" [ngClass]="{'availability' : car.available, 'no-availability' : !car.available}">
         <!-- Mostrar "Disponible" o "No disponible" según el estado de disponibilidad -->
-        {{ car.available ? 'Available' : 'Not Available' }}
+        {{ car.available ? "Available" : "Not Available" }}
       </div>
       <button (click)="toggleFavorite(car, $event)">
         <div class="favorite-icon" [class.active]="isFavorite(car)">
@@ -162,7 +168,7 @@
             class="form-control"
             readonly
             disabled=""
-            [(ngModel)]="selectedCarLicensePlate" 
+            [(ngModel)]="selectedCarLicensePlate"
           />
           <div
             class="error"
@@ -174,7 +180,6 @@
             La placa es requerida y debe tener entre 7 y 10 caracteres.
           </div>
         </div>
-
 
         <div class="form-group">
           <label for="start_date">Fecha de Inicio</label>
@@ -207,7 +212,7 @@
             class="form-control"
             [min]="minDate"
             required
-            [(ngModel)]="endDate" 
+            [(ngModel)]="endDate"
           />
           <div
             class="error"
@@ -219,8 +224,6 @@
             La fecha de fin es requerida.
           </div>
         </div>
-
-        
 
         <div class="form-group">
           <label for="total_cost">Costo Total</label>
@@ -255,4 +258,5 @@
       </form>
     </div>
   </div>
+
 </main>

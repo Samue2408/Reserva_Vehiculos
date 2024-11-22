@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,10 @@ import { AnimatedBackgroundComponent } from './shared/components/animated-backgr
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SkeletonModule } from 'primeng/skeleton';
+import { FormatDatePipe } from './shared/pipes/FormatDate.pipe';
+
+import { FullCalendarModule } from '@fullcalendar/angular'; 
+
 
 
 @NgModule({
@@ -39,8 +43,9 @@ import { SkeletonModule } from 'primeng/skeleton';
     SettingsComponent,
     LoginComponent,
     SignUpComponent,
-    AnimatedBackgroundComponent,
     HomeComponent,
+    FormatDatePipe,
+    AnimatedBackgroundComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,9 +55,9 @@ import { SkeletonModule } from 'primeng/skeleton';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SkeletonModule
-
+    SkeletonModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     provideClientHydration()
   ],

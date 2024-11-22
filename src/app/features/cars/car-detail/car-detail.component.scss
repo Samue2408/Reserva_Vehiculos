@@ -66,6 +66,7 @@
       justify-content: space-around;
       align-items: center;
 
+
       .child {
         height: 45%;
         width: calc(100% / 5);
@@ -155,9 +156,10 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     padding: 5px;
     background-color: transparent;
+    border: 1px solid;
 
     img {
       width: 70%;
@@ -165,19 +167,14 @@
       object-fit: contain;
       animation: scaleLow 0.4s ease-in-out;
     }
+
+    .calendar{
+      width: 50%;
+      height: 70%;
+      border: 1px solid;
+    }
   }
 
-  .financing {
-    width: 100%;
-    grid-area: financing;
-    border-radius: 10px;
-  }
-
-  .overview {
-    width: 100%;
-    grid-area: overview;
-    border-radius: 10px;
-  }
 }
 
 @keyframes scaleLow {

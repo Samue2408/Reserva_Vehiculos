@@ -31,6 +31,7 @@ export class CarsComponent implements OnInit {
   endDate: string = '';
   startDate: string = '';
   minDate: string; 
+  sucessRent: boolean = false;
 
   //icons
   faHeart = faHeart;
@@ -100,7 +101,7 @@ export class CarsComponent implements OnInit {
     await selectedCard?.classList.add('motion');
 
     this.carService.setSelectedCar(car);
-    this.router.navigate([`/carDetail/${index}`]);
+    this.router.navigate([`/carDetail/${car.license_plate}`]);
   }
 
   toggleFavorite(car: any, event: Event): void {
@@ -153,7 +154,7 @@ export class CarsComponent implements OnInit {
     return 0; // Si no hay fechas seleccionadas, retornamos 0
   }
 
-  onSubmit(form: any) {
+  async onSubmit(form: any) {
     if (form.valid) {
       const license_plate = this.selectedCarLicensePlate.slice(0, 3) + this.selectedCarLicensePlate.slice(4);
       this.bookingService.addBookings({d_start: this.startDate, 
@@ -161,7 +162,8 @@ export class CarsComponent implements OnInit {
         id_car: license_plate, 
         token: localStorage.getItem('Token') || ''}).subscribe({
           next: (data) => {
-            console.log('Booking done: ', data)
+            this.showModalRent = false;
+            alert(`Auto ${license_plate} rentado!`)
           },
           error: (err) => {
             console.log('error', err)

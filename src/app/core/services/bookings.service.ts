@@ -13,6 +13,8 @@ export interface Booking {
   model: string;            
   license_plate: string; 
   total_cost: number;
+  b_status: string;
+  image_path: string
 }
 
 @Injectable({
