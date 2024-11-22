@@ -35,10 +35,12 @@ export class BookingsService {
     return this.http.get<Booking>(`${this.myAppUrl}${this.myApiUrl}${localStorage.getItem('Token')}`)
   }
 
-  /* { d_start, d_end, id_car, token } */
-
   addBookings(booking: { d_start: string, d_end: string, id_car: string, token: string}): Observable<void> {
     return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}`, booking);
+  }
+
+  dateCarBusy(id_car: string): Observable<any> {
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}datebusy/${id_car}`)
   }
 
 }

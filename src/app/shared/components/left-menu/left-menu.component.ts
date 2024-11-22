@@ -16,7 +16,7 @@ import { response } from 'express';
   templateUrl: './left-menu.component.html',
   styleUrl: './left-menu.component.scss'
 })
-export class LeftMenuComponent {
+export class LeftMenuComponent  {
 
   // icons
   faList = faList
@@ -29,7 +29,6 @@ export class LeftMenuComponent {
   faArrowRightFromBracket = faArrowRightFromBracket
 
   constructor(private router: Router, private _userSevice: UsersService){
-
   }
 
   logOut(){
@@ -53,43 +52,22 @@ export class LeftMenuComponent {
   }
 
   // routes
-
-  buttons: any = [
-    {
-      route: '/main/dashboard',
-      icon: faList,
-      name: 'Dashboard'
-    },
-    {
-      route: '/main/cars',
-      icon: faCarRear,
-      name: 'Cars'
-    },
-    {
-      route: '/main/booking',
-      icon: faBagShopping,
-      name: 'Booking'
-    },
-    {
-      route: '/main/favorites',
-      icon: faHeart,
-      name: 'Favorites'
-    },
-    {
-      route: '/main/customers',
-      icon: faUser,
-      name: 'Customers'
-    },
-    {
-      route: '/main/settings',
-      icon: faGear,
-      name: 'Settings'
-    },
-    {
-      route: '',
-      icon: faArrowRightFromBracket,
-      name: 'Log Out'
-    }
-  ]
+ 
+  buttons = [
+    { route: '/main/dashboard', icon: faList, name: 'Dashboard', roles: ['1', '2'] },
+    { route: '/main/cars', icon: faCarRear, name: 'Cars', roles: ['1', '2', '3', '4'] },
+    { route: '/main/booking', icon: faBagShopping, name: 'Bookings', roles: ['1', '2', '3', '4'] },
+    { route: '/main/favorites', icon: faHeart, name: 'Favorites', roles: ['4'] },
+    { route: '/main/customers', icon: faUser, name: 'Customers', roles: ['1', '2'] },
+    { route: '/main/settings', icon: faGear, name: 'Settings', roles: ['1', '2', '3', '4'] },
+    { route: '', icon: faArrowRightFromBracket, name: 'Log Out', roles: ['1', '2', '3', '4'] }
+  ];
+  
+  userRole: string = localStorage.getItem('role') || '';
+  
+  getFilteredButtons(): any[] {
+    const buttonsFilterd = this.buttons.filter(button => button.roles.includes(this.userRole));
+    return buttonsFilterd.slice(0,buttonsFilterd.length-2);
+  }
   
 }

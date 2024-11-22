@@ -1,7 +1,7 @@
 <aside class="d-flex f-column justify-between">
   <div class="items-top d-flex f-column justify-around custom-container">
     <app-button-item 
-    *ngFor="let button of buttons.slice(0,5)"
+    *ngFor="let button of getFilteredButtons()"
     [icon]="button.icon"
     [route]="button.route"
     [name]="button.name"

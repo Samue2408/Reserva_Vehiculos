@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../../../core/services/cars.service';
 import { faRetweet, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { CalendarOptions } from '@fullcalendar/core/index.js';
+import { BookingsService } from '../../../core/services/bookings.service';
 
 @Component({
   selector: 'app-car-detail',
@@ -23,11 +24,22 @@ export class CarDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
-    public carService: CarService){}
+    public carService: CarService,
+    public bookingService: BookingsService){}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.car = this.carService.getSelectedCar(); 
+    const license_plate = this.car.license_plate.slice(0, 3) + this.car.license_plate.slice(4);
+    this.bookingService.dateCarBusy(license_plate).subscribe({
+      next: (data) => {
+        console.log(data)
+      },
+      error: (err) => {
+        console.log(err);
+        
+      }
+    })
   }
 
   rentCar(){

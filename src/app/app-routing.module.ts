@@ -11,6 +11,7 @@ import { CarDetailComponent } from './features/cars/car-detail/car-detail.compon
 import { LogOutComponent } from './auth/log-out/log-out.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { HomeComponent } from './home/home.component';
+import { permissionGuard } from './core/guards/permission.guard';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
+        canActivate: [permissionGuard],
         component: DashboardComponent,
       },
       {

@@ -19,6 +19,7 @@ interface User {
 export class UsersService {
   private myAppUrl: string;
   private myApiUrl: string;
+  public role: number = 0;
 
   constructor( private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
@@ -27,6 +28,10 @@ export class UsersService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.myAppUrl}${this.myApiUrl}`);
+  }
+
+  getCustomers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.myAppUrl}${this.myApiUrl}customer`);
   }
 
   addUser(user: User): Observable<void> {

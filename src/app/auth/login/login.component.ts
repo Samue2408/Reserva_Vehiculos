@@ -44,7 +44,9 @@ export class LoginComponent implements OnInit {
 
       this.userService.loginUser(userData).subscribe({
         next: (response) => {
-          localStorage.setItem("Token", response.token)
+          localStorage.setItem("Token", response.token);
+          this.userService.role = response.user['role'];
+          localStorage.setItem('role', this.userService.role.toString());
           console.log('Inicio de sesion Exitoso', response);
           this.router.navigate(['/main/dashboard']);
         },
