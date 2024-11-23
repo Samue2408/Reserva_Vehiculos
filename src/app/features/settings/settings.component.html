@@ -1,1 +1,75 @@
-<p>settings works!</p>
+<div class="settings-container">
+  <h2>Settings</h2>
+  <div class="bottom">
+    <div class="profile">
+      <div class="image-container">
+        <div class="image">S</div>
+        <h3>Samuel Maldonado</h3>
+      </div>
+      <div class="value">
+        <div class="input-container">
+          <fa-icon [icon]="faEmail"></fa-icon>
+          <input
+            disabled
+            type="text"
+            name="email"
+            placeholder="Email address"
+            required
+          />
+        </div>
+      </div>
+      <div class="value">
+        <div class="input-container">
+          <fa-icon [icon]="faUser"></fa-icon>
+          <input type="text" name="name" placeholder="Username" required />
+        </div>
+      </div>
+      <div class="value">
+        <div class="input-container">
+          <fa-icon [icon]="faHome"></fa-icon>
+          <input type="text" name="address" placeholder="Address" required />
+        </div>
+      </div>
+      <div class="value">
+        <div class="input-container">
+          <fa-icon [icon]="faPhone"></fa-icon>
+          <input type="number" name="number" placeholder="Phone" required />
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="new-password">
+        <h2>Change password</h2>
+        <div class="value">
+          <div class="input-container">
+            <fa-icon [icon]="faLock"></fa-icon>
+            <input
+              disabled
+              type="password"
+              name="email"
+              placeholder="New password"
+              required
+            />
+          </div>
+        </div>
+        <div class="value">
+          <div class="input-container">
+            <fa-icon [icon]="faLock"></fa-icon>
+            <input
+              disabled
+              type="password"
+              name="email"
+              placeholder="Confirm password"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="delete-account">
+        <h2>Zone danger</h2>
+        <button>Delete account</button>
+        <span>You must be careful, once you delete your account there is no going back.</span>
+      </div>
+    </div>
+  </div>
+</div>
