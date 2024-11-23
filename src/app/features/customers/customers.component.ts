@@ -18,7 +18,7 @@ export class CustomersComponent implements OnInit {
   getAllBokings(): void {
     this.customerservice.getCustomers().subscribe({
       next: (data) => {
-        data.forEach((customer: any) => {
+        data.map((customer: any) => {
           customer.avatar = customer.c_name.charAt(0);
         });
         this.Customers = data;
