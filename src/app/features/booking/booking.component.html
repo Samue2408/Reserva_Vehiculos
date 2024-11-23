@@ -38,6 +38,9 @@
   >
     <div class="modal-ellipsis">
       <p>ID: {{ selectedBookingId }}</p>
+      <button (click)="hideModal()" class="cancel-modal">
+        <fa-icon [icon]="faCancel"></fa-icon>
+      </button>
       <button class="action-btn delete" (click)="hideModal()">
         <fa-icon [icon]="faDelete"></fa-icon>
         <span>Delete booking</span>
