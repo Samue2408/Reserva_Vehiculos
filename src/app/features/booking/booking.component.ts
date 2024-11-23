@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingsService } from '../../core/services/bookings.service';
-import { faCar, faEllipsis, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCar,
+  faEllipsis,
+  faPencil,
+  faTrash,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { CarService } from '../../core/services/cars.service';
 
@@ -11,6 +17,9 @@ import { CarService } from '../../core/services/cars.service';
 })
 export class BookingComponent implements OnInit {
   bookings: any[] = [];
+  showEllipsisModal = false;
+  modalPosition = { top: '0px', left: '0px' };
+  selectedBookingId: string | null = null;
 
   constructor(
     public bookingservice: BookingsService,
@@ -19,9 +28,11 @@ export class BookingComponent implements OnInit {
   ) {}
 
   //icons
-  faCar = faCar
-  faDelete = faTrash
-  faEllipsis = faEllipsis
+  faCar = faCar;
+  faDelete = faTrash;
+  faEllipsis = faEllipsis;
+  faEdit = faPencil;
+  faCancel = faXmark;
 
   ngOnInit(): void {
     this.getAllBookings();
@@ -31,7 +42,7 @@ export class BookingComponent implements OnInit {
     this.bookingservice.getBookings().subscribe({
       next: (data: any) => {
         this.bookings = [...data];
-        
+        console.log(this.bookings);
       },
       error: (err) => {
         console.error(err);
@@ -54,4 +65,19 @@ export class BookingComponent implements OnInit {
     }
   }
 
+  showModal(event: MouseEvent, bookingId: string): void {
+    const button = event.target as HTMLElement;
+    const rect = button.getBoundingClientRect();
+    this.modalPosition = {
+      top: `${rect.top + window.scrollY}px`,
+      left: `${rect.left + window.scrollX}px`,
+    };
+    this.selectedBookingId = bookingId;
+    this.showEllipsisModal = true;
+  }
+
+  hideModal(): void {
+    this.showEllipsisModal = false;
+    this.selectedBookingId = null;
+  }
 }
