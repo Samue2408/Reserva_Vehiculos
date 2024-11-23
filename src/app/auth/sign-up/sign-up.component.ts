@@ -58,11 +58,23 @@ export class SignUpComponent implements OnInit {
   onSubmit(): void {
     if (this.fullName && this.email && this.password) {
       if (this.strengthLevel >= 5) {
+
+        // Determinar el role_id basado en el dominio del correo electrónico
+      let role_id = 4; // Valor por defecto
+
+        if (/@RENTAGO\.EMP\.CO$/i.test(this.email)) {
+          role_id = 3;
+        } else if (/@RENTAGO\.MAN\.CO$/i.test(this.email)) {
+          role_id = 2;
+        } else if (/@RENTAGO\.ADMIN\.CO$/i.test(this.email)) {
+          role_id = 1;
+        }
+
         const userData = {
           c_name: this.fullName,
           email: this.email,
           password: this.password,
-          role_id: 4,
+          role_id,
         };
 
         this._userService.addUser(userData).subscribe({
