@@ -17,12 +17,7 @@ export class AuthService {
   }
 
   isLoggedIn(): Observable<any> {
-    if (typeof localStorage === 'undefined') {
-      return new Observable(observer => {
-        observer.next({ valid: null });
-        observer.complete();
-      });
-    }
+    
     
     const token = localStorage.getItem('Token');
     

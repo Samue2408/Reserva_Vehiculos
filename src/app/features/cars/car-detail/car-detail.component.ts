@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../../../core/services/cars.service';
-import { faRetweet, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faRetweet, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { CalendarOptions } from '@fullcalendar/core/index.js';
 import { BookingsService } from '../../../core/services/bookings.service';
+import dayGridPlugin from '@fullcalendar/daygrid'; 
+
 
 @Component({
   selector: 'app-car-detail',
@@ -18,6 +20,7 @@ export class CarDetailComponent implements OnInit {
   //icons
   faRetwet = faRetweet;
   faWandSparkles = faWandSparkles;
+  faArrowLeft = faChevronLeft
 
   showModal: boolean = false;
 
@@ -32,8 +35,21 @@ export class CarDetailComponent implements OnInit {
     this.car = this.carService.getSelectedCar(); 
     const license_plate = this.car.license_plate.slice(0, 3) + this.car.license_plate.slice(4);
     this.bookingService.dateCarBusy(license_plate).subscribe({
-      next: (data) => {
-        console.log(data)
+      next: (response) => {
+        if (response?.data) { // Asegúrate de que la propiedad "data" existe
+          this.events = response.data.map((element: any) => {
+            return {
+              title: 'reservado', // Título para cada evento
+              start: element['start_date'].slice(0,10), // Fecha de inicio
+              end: element['end_date'] // Fecha final
+            };
+          });
+          this.calendarOptions.events = this.events;
+          console.log(this.events)
+        } else {
+          console.error('El objeto de respuesta no contiene un array válido en "data".');
+          this.events = []; // Asignar un array vacío si no hay datos
+        }
       },
       error: (err) => {
         console.log(err);
@@ -46,39 +62,23 @@ export class CarDetailComponent implements OnInit {
     this.router.navigate(['/rent'])
   }
 
-  events = [
-    {
-      title: 'Reunión de equipo',
-      start: '2024-11-22T09:00:00',
-      end: '2024-11-22T10:00:00'
-    },
-    {
-      title: 'Llamada con cliente',
-      start: '2024-11-23T14:00:00',
-      end: '2024-11-23T15:00:00'
-    },
-    {
-      title: 'Taller de desarrollo',
-      start: '2024-11-25T11:00:00',
-      end: '2024-11-25T13:00:00'
-    },
-    {
-      title: 'Presentación de proyecto',
-      start: '2024-11-26T16:00:00',
-      end: '2024-11-26T17:00:00'
-    },
-    {
-      title: 'Comida de trabajo',
-      start: '2024-11-28T13:00:00',
-      end: '2024-11-28T14:00:00'
-    }
-  ];
+  events: any[] = [];
 
   calendarOptions: CalendarOptions = {
+    plugins: [dayGridPlugin],
     initialView: 'dayGridMonth',
-    events: this.events  
+    events: this.events,
+    eventColor: '#a70707',
+    headerToolbar: {
+      left: 'today',
+      center: 'title',
+      right: 'prev,next',
+    },
+    buttonText: {
+      prev: '◀', // Icono para el botón "anterior"
+      next: '▶', // Icono para el botón "siguiente"
+    },
+    themeSystem: 'standart', // Usa el sistema de temas estándar de FullCalendar
   };
-  
-  
 
 }
