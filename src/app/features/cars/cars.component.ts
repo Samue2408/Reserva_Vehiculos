@@ -32,6 +32,7 @@ export class CarsComponent implements OnInit {
   startDate: string = '';
   minDate: string; 
   sucessRent: boolean = false;
+  isRole4: boolean = false;
 
   //icons
   faHeart = faHeart;
@@ -52,6 +53,7 @@ export class CarsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCars();
+    this.isRole4 = localStorage.getItem('role') === '4';
   }
 
   getAllCars() {

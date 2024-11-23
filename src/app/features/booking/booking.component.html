@@ -37,19 +37,19 @@
     }"
   >
     <div class="modal-ellipsis">
-      <p>ID: {{ selectedBookingId }}</p>
+      <p>Booking {{ selectedBookingId }}</p>
       <button (click)="hideModal()" class="cancel-modal">
         <fa-icon [icon]="faCancel"></fa-icon>
       </button>
-      <button class="action-btn delete" (click)="hideModal()">
+      <button *ngIf="isRole1" class="action-btn delete" (click)="hideModal()">
         <fa-icon [icon]="faDelete"></fa-icon>
         <span>Delete booking</span>
       </button>
-      <button class="action-btn edit">
+      <button *ngIf="isRole1" class="action-btn edit" (click)="hideModal()">
         <fa-icon [icon]="faEdit"></fa-icon>
         <span>Edit booking</span>
       </button>
-      <button class="action-btn cancel">
+      <button class="action-btn cancel" (click)="hideModal()">
         <fa-icon [icon]="faCancel"></fa-icon>
         <span>Cancel booking</span>
       </button>

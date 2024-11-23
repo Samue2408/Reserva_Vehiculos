@@ -29,16 +29,20 @@ nav {
     width: 15%;
     height: 100%;
     padding-left: 20px;
-
-    h2 {
-      font-family: "Righteous";
-      color: #474747;
-
-      span {
-        font-family: inherit;
-        color: rgb(4, 241, 186);
+    a {
+      text-decoration: none;
+      h2 {
+        
+        font-family: "Righteous";
+        color: #474747;
+  
+        span {
+          font-family: inherit;
+          color: rgb(4, 241, 186);
+        }
       }
     }
+
   }
 
   .options {

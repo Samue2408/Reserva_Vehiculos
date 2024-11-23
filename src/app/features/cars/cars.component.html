@@ -53,7 +53,9 @@
         {{ car.available ? "Available" : "Not Available" }}
       </div>
       <button (click)="toggleFavorite(car, $event)">
-        <div class="favorite-icon" [class.active]="isFavorite(car)">
+        <div class="favorite-icon"
+         *ngIf="isRole4"
+         [class.active]="isFavorite(car)">
           <fa-icon [icon]="faHeart"></fa-icon>
         </div>
       </button>
@@ -89,7 +91,7 @@
           </div>
         </div>
       </div>
-      <div class="right">
+      <div class="right" *ngIf="isRole4">
         <button (click)="openModalRent($event, car)">
           Rent
           <fa-icon [icon]="faShopping"></fa-icon>

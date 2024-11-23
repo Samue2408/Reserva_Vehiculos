@@ -7,6 +7,9 @@ import { faArrowRight, faEnvelope, faExclamationTriangle, faEye, faEyeSlash, faH
   styleUrl: './settings.component.scss',
 })
 export class SettingsComponent implements OnInit {
+
+  user: any;
+
   constructor() {}
 
   // Icons
@@ -20,7 +23,18 @@ export class SettingsComponent implements OnInit {
   faPhone = faPhone
   faUser = faUser
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+   const userString = localStorage.getItem('user')
+     
+   this.user = JSON.parse(userString || "")    
+   console.log(this.user) 
+
+   
+   this.user.avatar = this.user.name.charAt(0);   
+
+   this.user = {... this.user}
+
+  }
 
   getProfile() {}
 }

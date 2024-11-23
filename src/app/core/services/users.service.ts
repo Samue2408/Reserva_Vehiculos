@@ -53,7 +53,7 @@ export class UsersService {
         'Authorization': `Bearer ${localStorage.getItem('Token')}`,
         'Content-Type': 'application/json',
       });
-      localStorage.removeItem('Token');
+      localStorage.clear();
     }
         
     return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}logout`, {}, {headers});

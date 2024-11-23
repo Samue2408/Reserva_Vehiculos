@@ -20,6 +20,7 @@ export class BookingComponent implements OnInit {
   showEllipsisModal = false;
   modalPosition = { top: '0px', left: '0px' };
   selectedBookingId: string | null = null;
+  isRole1: boolean = false;
 
   constructor(
     public bookingservice: BookingsService,
@@ -36,6 +37,7 @@ export class BookingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllBookings();
+    this.isRole1 = localStorage.getItem('role') === '1';
   }
 
   getAllBookings(): void {
