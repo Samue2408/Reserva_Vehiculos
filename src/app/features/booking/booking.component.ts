@@ -31,7 +31,6 @@ export class BookingComponent implements OnInit {
     this.bookingservice.getBookings().subscribe({
       next: (data: any) => {
         this.bookings = [...data];
-        console.log(data);
         
       },
       error: (err) => {

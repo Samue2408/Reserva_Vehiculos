@@ -31,24 +31,21 @@ export class LeftMenuComponent  {
   constructor(private router: Router, private _userSevice: UsersService){
   }
 
-  logOut(){
-
-    // this.router.navigate(['/log-out']);
-    
+  logOut(){    
     this._userSevice.logoutUser().subscribe({
-      next: (response) => {
+      next: async(response) => {
         console.log(response.message); // Muestra mensaje de éxito
         localStorage.removeItem("Token");
-        this.router.navigate(['/login']);
+        await this.router.navigate(['/log-out']);
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 2800);
         
       },
       error: (e) => {
         console.log("Error al desloguearse", e)
       }
-    })
-    
-    // setTimeout(() => {
-    // }, 4000);
+    })    
   }
 
   // routes

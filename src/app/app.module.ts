@@ -22,7 +22,7 @@ import { AnimatedBackgroundComponent } from './shared/components/animated-backgr
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SkeletonModule } from 'primeng/skeleton';
-import { FormatDatePipe } from './shared/pipes/FormatDate.pipe';
+import { convertStatusBooking, FormatDatePipe } from './shared/pipes/FormatDate.pipe';
 
 
 
@@ -44,6 +44,7 @@ import { FormatDatePipe } from './shared/pipes/FormatDate.pipe';
     HomeComponent,
     FormatDatePipe,
     AnimatedBackgroundComponent,
+    convertStatusBooking
   ],
   imports: [
     BrowserModule,

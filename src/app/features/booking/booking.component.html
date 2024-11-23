@@ -14,25 +14,20 @@
       </div>
       <div class="details">
         <p>
-          <span class="label">Cliente:</span> {{ booking.nombre }}
+          <span class="label">Client:</span> {{ booking.nombre }}
         </p>
         <p>
-          <span class="label">Inicio:</span> {{ booking.start_date | formatDate}}
+          <span class="label">Date start:</span> {{ booking.start_date | formatDate}}
         </p>
         <p>
-          <span class="label">Fin:</span> {{ booking.end_date | formatDate}}
+          <span class="label">Date end:</span> {{ booking.end_date | formatDate}}
         </p>
         <p>
-          <span class="label">Costo total:</span> ${{ booking.total_cost }}
+          <span class="label">Total cost:</span> ${{ booking.total_cost }}
         </p>
       </div>
       <div class="footer">
-        <span class="badge" [ngClass]="getBookingClass(booking.b_status)">{{ booking.b_status }}</span>
-        <span
-          *ngIf="booking.b_status === 'Pendiente'"
-          class="status-info"
-          >Apartado</span
-        >
+        <span class="badge" [ngClass]="getBookingClass(booking.b_status)">{{ booking.b_status  | convertStatusBooking}}</span>
       </div>
     </div>
     <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]">

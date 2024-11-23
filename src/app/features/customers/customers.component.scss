@@ -4,6 +4,8 @@
   padding: 20px;
   text-align: center;
   background-color: #f9f9fb;
+  overflow-y: auto;
+  max-height: 100vh;
 
   .title {
     font-size: 2.5rem;

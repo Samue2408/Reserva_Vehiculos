@@ -16,7 +16,32 @@ export class FormatDatePipe implements PipeTransform {
       year: 'numeric'
     };
 
-    return new Intl.DateTimeFormat('es-ES', options).format(date)
+    return new Intl.DateTimeFormat('en-EN', options).format(date)
       .replace(/de /g, ' de '); 
+  }
+}
+
+@Pipe({
+  name: 'convertStatusBooking'
+})
+export class convertStatusBooking implements PipeTransform {
+
+  transform(status: string): any {
+    if(!status){
+      return '';
+    }
+
+    switch(status){
+      case 'Pendiente':
+        return 'reserved'
+      case 'Completada':
+        return 'completed'
+      case 'Cancelada':
+        return 'cancelled'
+      case 'Activa':
+        return 'active'
+      default: 
+        return 'unknow'
+    }
   }
 }

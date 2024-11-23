@@ -1,105 +1,99 @@
 @keyframes showTopText {
-    0% {
-      transform: translate3d(0, 100%, 0);
-    }
-  
-    40%,
-    60% {
-      transform: translate3d(0, 50%, 0);
-    }
-  
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
+  0% {
+    transform: translate3d(0, 100%, 0);
   }
-  
-  @keyframes showBottomText {
-    0% {
-      transform: translate3d(0, -100%, 0);
-    }
-  
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
+  40%, 60% {
+    transform: translate3d(0, 50%, 0);
   }
-  
-  
-  .animated-title {
-    color: black;
-    height: 90vh;
-    left: 50%;
-    position: absolute;
-    top: calc(50% - 47px);
-    transform: translate(-50%, -50%);
-    width: 50vmin;
-    max-width: 460px;
-    display: flex;
-    flex-direction: column;
-    
-    @media screen and (max-width: 600px) {
-      width: 94vw;
-    }
-  
-    >div {
-      height: 50%;
-      overflow: hidden;
-      position: absolute;
-      width: 100%;
-  
-      div {
-        font-size: clamp(2rem, 4vmin, 4vmin);
-        font-weight: 600;
-        padding: 1.5rem 0;
-        position: absolute;
-  
-        span {
-          display: block;
-        }
-      }
-    }
-  
-    .text-top {
-      top: 0;
-  
-      div {
-        animation: showTopText 600ms;
-        animation-delay: 0.2s;
-        animation-fill-mode: forwards;
-        bottom: 0;
-        transform: translate(0, 100%);
-        width: 100%;
-  
-        span:first-child {
-          color: gray;
-        }
-      }
-  
-    }
-  
-    .text-divider {
-      @keyframes dividerAnimation {
-        100% {
-          background-size: 100% 100%;
-        }
-      }
-  
-      width: 100%;
-      height: 8px;
-      border-color: transparent;
-      background: linear-gradient(blue 0 0) left/0% 100% no-repeat rgb(214, 214, 214);
-      animation: dividerAnimation 2800ms infinite linear;
-      top: 49%;
-    }
-  
-    .text-bottom {
-      bottom: 0;
-  
-      div {
-        animation: showBottomText 0.5s;
-        animation-delay: 600ms;
-        animation-fill-mode: forwards;
-        top: 0;
-        transform: translate(0, -100%);
-      }
-    }
+  100% {
+    transform: translate3d(0, 0, 0);
   }
+}
+
+@keyframes showBottomText {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dividerAnimation {
+  100% {
+    background-size: 100% 100%;
+  }
+}
+
+.animated-title {
+  color: black;
+  background-color: #131313;
+  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (max-width: 600px) {
+    width: 90vw;
+  }
+}
+
+.animated-title > div {
+  height: 50%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.animated-title .text-top {
+  position: relative;
+}
+
+.animated-title .text-top div {
+  animation: showTopText 600ms ease-out forwards;
+  animation-delay: 0.2s;
+  font-size: clamp(2rem, 4vmin, 4vmin);
+  font-weight: 600;
+  padding: 1.5rem 0;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  transform: translate(0, 100%);
+  width: 100%;
+  text-align: center;
+}
+
+.animated-title .text-top span:first-child {
+  color: white;
+}
+
+.animated-title .text-divider {
+  width: 30%;
+  height: 8px;
+  background: linear-gradient(blue 0 0) left/0% 100% no-repeat rgb(214, 214, 214);
+  animation: dividerAnimation 2.8s infinite linear;
+  margin: 0 auto;
+}
+
+.animated-title .text-bottom {
+  position: relative;
+  margin-top: 40px;
+}
+
+.animated-title .text-bottom div {
+  animation: showBottomText 500ms ease-out forwards;
+  animation-delay: 600ms;
+  font-size: clamp(1.8rem, 3.5vmin, 4vmin);
+  font-weight: 600;
+  color: white;
+  position: absolute;
+  top: 0;
+  transform: translate(0, -100%);
+  text-align: center;
+  width: 100%;
+}
