@@ -10,19 +10,22 @@ export class AuthService {
 
   private myAppUrl: string;
   private myApiUrl: string;
+  token: string | null = null;
 
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = 'api/users/';
   }
 
+
+
   isLoggedIn(): Observable<any> {
     
     
-    const token = localStorage.getItem('Token');
+    this.token = localStorage.getItem('Token');
     
-    if (token) {
-      return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}validate-token`, { token })
+    if (this.token) {
+      return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}validate-token`, { token: this.token })
     }    
 
     return new Observable(observer => {

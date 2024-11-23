@@ -24,8 +24,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SkeletonModule } from 'primeng/skeleton';
 import { FormatDatePipe } from './shared/pipes/FormatDate.pipe';
 
-import { FullCalendarModule } from '@fullcalendar/angular'; 
-
 
 
 @NgModule({

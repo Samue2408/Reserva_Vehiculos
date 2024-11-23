@@ -1,1 +1,16 @@
-<p>customers works!</p>
+<div class="customers-container">
+  <div class="customers-grid">
+    <div *ngFor="let customer of Customers" class="customer-card">
+      <div class="customer-info">
+        <div class="customer-image">
+          <span> {{ customer.avatar }}</span>
+        </div>
+        <h2 class="customer-name">{{ customer.c_name }}</h2>
+        <p class="customer-description">{{ customer.email }}</p>
+        <span class="customer-status"
+          >{{ customer.address || "not address" }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

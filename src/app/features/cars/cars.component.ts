@@ -57,10 +57,8 @@ export class CarsComponent implements OnInit {
   getAllCars() {
     this.carService.getAllCars().subscribe({
       next: (response) => {
-        // obitiene los carros de la bd y los guarda en el array del servicio
         this.filteredCars = response
         this.carService.cars = response
-        // date actual
         const date = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`        
 
         // mapea el array de carros y les ponen si estan o no disponibles

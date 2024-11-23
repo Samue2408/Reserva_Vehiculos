@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingsService } from '../../core/services/bookings.service';
-import { faCar, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCar, faEllipsis, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { CarService } from '../../core/services/cars.service';
 
@@ -21,6 +21,7 @@ export class BookingComponent implements OnInit {
   //icons
   faCar = faCar
   faDelete = faTrash
+  faEllipsis = faEllipsis
 
   ngOnInit(): void {
     this.getAllBookings();

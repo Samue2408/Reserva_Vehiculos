@@ -1,6 +1,6 @@
 <main>
   <app-nav-bar [cssClass]="'nav-dark'" [isHomeView]="true"></app-nav-bar>
-  <div class="top">
+  <div class="top" id="top">
     <header class="header">
       <div class="header-description">
         <h1 class="description-title">
@@ -12,8 +12,8 @@
           one click.
         </p>
         <div class="buttons">
-          <button>Rent</button>
-          <button>See all cars</button>
+          <button (click)="goToRent()">Rent</button>
+          <button><a [ngStyle]="{'text-decoration' : 'none', 'color' : 'white'}" href="home#catalog">See all cars</a></button>
         </div>
       </div>
       <div class="header-image"></div>
@@ -24,14 +24,46 @@
   </div>
   <div class="about" id="about">
     <h2>We are an entity that rents cars</h2>
-    <p>We are dedicated to providing our customers with an exceptional experience when renting high-quality vehicles, giving them the freedom to travel comfortably and with confidence. With a diverse fleet and personalized service, we ensure that each of our customers receives a safe, efficient and hassle-free service.</p>
+    <p>
+      We are dedicated to providing our customers with an exceptional experience
+      when renting high-quality vehicles, giving them the freedom to travel
+      comfortably and with confidence. With a diverse fleet and personalized
+      service, we ensure that each of our customers receives a safe, efficient
+      and hassle-free service.
+    </p>
     <div class="cards">
       <div *ngFor="let card of cards" class="card-car">
         <fa-icon [icon]="card.icon"></fa-icon>
-        <h3>{{card.title}}</h3>
-        <p>{{card.description}}</p>
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.description }}</p>
       </div>
     </div>
   </div>
-  <div class="services"></div>
+  <div class="catalog" id="catalog">
+    <h2>Explore our cars</h2>
+    <div class="carousel">
+      <div class="carousel-container">
+        <div
+          class="carousel-slide"
+          *ngFor="let car of carService.cars; let i = index"
+          [ngClass]="{ active: i === currentSlide }"
+        >
+          <img [src]="car.image_path" [alt]="car.brand" />
+        </div>
+      </div>
+      <button class="prev" (click)="prevSlide()">&#10094;</button>
+      <button class="next" (click)="nextSlide()">&#10095;</button>
+
+
+      <!-- Indicators -->
+      <div class="indicators">
+        <span
+          *ngFor="let car of carService.cars; let i = index"
+          class="dot"
+          [ngClass]="{ 'active-dot': i === currentSlide }"
+          (click)="goToSlide(i)"
+        ></span>
+      </div>
+    </div>
+  </div>
 </main>

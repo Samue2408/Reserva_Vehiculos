@@ -7,14 +7,22 @@ nav {
 
   &.nav-dark {
     background-color: transparent;
-    h2 {
-      color: #ffffff !important;
+    a {
+      text-decoration: none;
+      h2 {
+        color: #ffffff !important;
+      }
     }
   }
 
   &.nav-light {
     background-color: #f9f9f9;
-    color: #333;
+    a {
+      text-decoration: none;
+      h2 {
+        color: #333 !important;
+      }
+    }
   }
 
   .icon-container {

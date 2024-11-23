@@ -1,6 +1,5 @@
-html{
+html {
   scroll-behavior: smooth !important;
-  
 }
 main {
   width: 100%;
@@ -9,11 +8,14 @@ main {
   background-color: #131313;
   background-image: url("https://png.pngtree.com/png-vector/20220615/ourmid/pngtree-grid-paper-dot-pattern-background-png-image_5093042.png");
 
-
-  #about, #services, #catalog, #blog {
-    scroll-margin-top: 10px; 
+  #about,
+  #catalog{
+    scroll-margin-top: 10px;
   }
-  
+
+  #top{
+    scroll-margin-top: -10px;
+  }
 
   .top {
     width: 100%;
@@ -35,7 +37,7 @@ main {
         justify-content: center;
         padding: 30px;
         gap: 15px;
-        
+
         .description-title {
           color: white;
           font-size: 4rem;
@@ -43,7 +45,6 @@ main {
           background-image: linear-gradient(to right, #ff7e5f, #c516e8);
           -webkit-background-clip: text;
           color: transparent;
-          
         }
 
         .description-text {
@@ -126,14 +127,14 @@ main {
     background-blend-mode: multiply;
     box-shadow: -10px -10px 40px 10px black, 10px 10px 40px 10px black;
 
-    h2{
+    h2 {
       color: white;
       font-size: 3.5rem;
-      font-family: 'Cormorant';
+      font-family: "Cormorant";
       margin: 0;
     }
 
-    p{
+    p {
       margin: 0;
       text-align: center;
       font-size: 1rem;
@@ -141,7 +142,7 @@ main {
       width: 50%;
     }
 
-    .cards{
+    .cards {
       width: 100%;
       height: 50%;
       display: flex;
@@ -149,7 +150,7 @@ main {
       justify-content: space-around;
       gap: 10px;
 
-      .card-car{
+      .card-car {
         box-shadow: none !important;
         background-color: #131313 !important;
         position: relative;
@@ -160,23 +161,23 @@ main {
         padding-left: 20px;
         background-image: url("https://png.pngtree.com/png-vector/20220615/ourmid/pngtree-grid-paper-dot-pattern-background-png-image_5093042.png");
 
-        &:first-of-type{
+        &:first-of-type {
           background: linear-gradient(#bf62d2, #c516e8) !important;
         }
 
-        &:nth-of-type(2){
+        &:nth-of-type(2) {
           background: linear-gradient(#66d262, #72df56) !important;
         }
 
-        &:nth-of-type(3){
+        &:nth-of-type(3) {
           background: linear-gradient(#62d2ce, #56cfdf) !important;
         }
 
-        &:nth-of-type(4){
+        &:nth-of-type(4) {
           background: linear-gradient(#bcd262, #d1df56) !important;
         }
 
-        fa-icon{
+        fa-icon {
           position: absolute;
           left: 20px;
           top: 20px;
@@ -184,15 +185,15 @@ main {
           color: white;
         }
 
-        h3{
+        h3 {
           color: white;
           font-weight: 700;
           font-size: 30px;
           max-height: 30px;
           width: 90%;
         }
-        
-        p{
+
+        p {
           width: 70%;
           text-align: start;
           font-size: 15px;
@@ -201,13 +202,116 @@ main {
           color: white;
         }
       }
-
     }
-  
   }
 
-  .services{
+  .catalog {
     width: 100%;
     height: 100vh;
+    background: linear-gradient(white, #bdbdbd) ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h2 {
+      text-align: center;
+      font-family: "Cormorant";
+      color: black;
+      font-size: 60px;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 100%;
+      margin-bottom: 30px;
+      
+      .carousel-container {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .carousel-slide {
+        height: 60%;
+        min-width: 100%;
+        transition: opacity 0.5s ease-in-out;
+        opacity: 0;
+        display: none;
+
+        
+        h3{
+          color: #131313;
+          font-size: 40px;
+        }
+
+        img{
+          transform: scale(0.6);
+          width: 900px;
+          height: 700px;
+        }
+
+        &.active {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          margin-bottom: 24px;
+          opacity: 1;
+
+        }
+      }
+
+      .prev,
+      .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+        padding: 10px;
+        clip-path: circle();
+        border-radius: 50%;
+      }
+
+      .prev {
+        left: 10px;
+      }
+
+      .next {
+        right: 10px;
+      }
+
+      .indicators {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+
+        .dot {
+          height: 10px;
+          width: 10px;
+          margin: 0 5px;
+          background: #bbb;
+          border-radius: 50%;
+          display: inline-block;
+          cursor: pointer;
+
+          &.active-dot {
+            background: #717171;
+          }
+        }
+      }
+    }
   }
 }

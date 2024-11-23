@@ -23,18 +23,6 @@
       transform: translateY(-5px);
     }
 
-    &.pending {
-      border: 1px solid #f39c12; 
-    }
-    &.active {
-      border: 1px solid #3498db; 
-    }
-    &.completed {
-      border: 1px solid #2ecc71; 
-    }
-    &.cancelled {
-      border: 1px solid #e74c3c; 
-    }
 
     .header {
       display: flex;
@@ -79,9 +67,6 @@
         cursor: pointer;
         transition: .5s ease-in;
 
-        &:hover{
-          background-color: rgb(255, 169, 169);
-        }
       }
     }
 
@@ -111,7 +96,20 @@
         font-size: 12px;
         font-weight: bold;
         text-transform: uppercase;
-        color: #555;
+        color: white;
+
+        &.pending {
+          background-color: #f39c12 !important; 
+        }
+        &.active {
+          background-color:  #3498db !important; 
+        }
+        &.completed {
+          background-color: #2ecc71 !important; 
+        }
+        &.cancelled {
+          background-color: #e74c3c !important; 
+        }
       }
 
       .status-info {

@@ -2,7 +2,6 @@
     <div
       class="booking"
       *ngFor="let booking of bookings"
-      [ngClass]="getBookingClass(booking.b_status)"
     >
       <div class="header">
         <div class="icon">
@@ -10,7 +9,7 @@
         </div>
         <h3>{{ booking.license_plate }}</h3>
         <button>
-          <fa-icon [icon]="faDelete"></fa-icon>
+          <fa-icon [icon]="faEllipsis"></fa-icon>
         </button>
       </div>
       <div class="details">
@@ -28,7 +27,7 @@
         </p>
       </div>
       <div class="footer">
-        <span class="badge">{{ booking.b_status }}</span>
+        <span class="badge" [ngClass]="getBookingClass(booking.b_status)">{{ booking.b_status }}</span>
         <span
           *ngIf="booking.b_status === 'Pendiente'"
           class="status-info"
